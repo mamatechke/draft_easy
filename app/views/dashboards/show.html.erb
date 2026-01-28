@@ -45,8 +45,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% @recent_cases.each do |c| %>
-                    <tr>
+                  <% @recent_cases.each_with_index do |c, i| %>
+                    <tr class="<%= i.even? ? 'bg-base-100' : 'bg-base-200' %>">
                       <td class="font-semibold"><%= c.case_name %></td>
                       <td><%= c.jurisdiction %></td>
                       <td><%= c.decision_year %></td>
