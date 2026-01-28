@@ -1,5 +1,29 @@
+
 <div class="p-8">
   <h1 class="text-3xl font-bold mb-4">Welcome to your Draft Easy Dashboard</h1>
   <p class="mb-2">This is your starting point for managing cases, uploading documents, and generating drafts.</p>
-  <!-- Add dashboard widgets and navigation here -->
+
+  <div class="mt-8">
+    <div class="flex justify-between items-center mb-2">
+      <h2 class="text-xl font-semibold">Recent Cases</h2>
+      <%= link_to "All Cases", cases_path, class: "btn btn-outline btn-sm" %>
+    </div>
+    <% if @recent_cases.any? %>
+      <ul class="divide-y divide-base-200 bg-base-100 rounded-lg shadow">
+        <% @recent_cases.each do |c| %>
+          <li class="p-4 flex flex-col md:flex-row md:items-center md:justify-between">
+            <div>
+              <div class="font-bold"><%= c.title %></div>
+              <div class="text-base-content/70 text-sm"><%= c.description.truncate(60) %></div>
+            </div>
+            <div class="mt-2 md:mt-0 flex gap-2">
+              <%= link_to "View", case_path(c), class: "btn btn-xs btn-primary" %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="alert alert-info mt-2">No cases yet. <%= link_to "Create your first case", new_case_path, class: "link link-primary" %></div>
+    <% end %>
+  </div>
 </div>

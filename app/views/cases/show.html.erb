@@ -1,0 +1,44 @@
+
+
+<div class="max-w-2xl mx-auto mt-10 p-8 bg-base-100 rounded-lg shadow">
+	<h1 class="text-2xl font-bold mb-4"><%= @case.case_name %></h1>
+	<div class="mb-4">
+		<div class="card bg-base-200 rounded-lg shadow-sm p-3 flex flex-col sm:flex-row gap-2 sm:gap-6 text-base-content border-l-4 border-primary ml-[-1rem]">
+			<span><strong>Court:</strong> <%= @case.court %></span>
+			<span><strong>Year:</strong> <%= @case.decision_year %></span>
+			<span><strong>Jurisdiction:</strong> <%= @case.jurisdiction %></span>
+		</div>
+	</div>
+	<div class="mb-4">
+		<strong>Citation:</strong> <%= @case.citation %>
+	</div>
+	<div class="prose max-w-none">
+		<%# IRAC Method %>
+		<h2 class="bg-secondary text-secondary-content px-4 py-2 rounded mb-2 inline-block border-l-4 border-primary ml-[-1rem]">Procedural History</h2>
+		<p><%= simple_format(@case.procedural_history) %></p>
+		<h2 class="bg-secondary text-secondary-content px-4 py-2 rounded mb-2 inline-block border-l-4 border-primary ml-[-1rem]">Facts</h2>
+		<p><%= simple_format(@case.facts) %></p>
+		<h2 class="bg-secondary text-secondary-content px-4 py-2 rounded mb-2 inline-block border-l-4 border-primary ml-[-1rem]">Legal Issue</h2>
+		<p><%= simple_format(@case.legal_issue) %></p>
+		<h2 class="bg-secondary text-secondary-content px-4 py-2 rounded mb-2 inline-block border-l-4 border-primary ml-[-1rem]">Holding</h2>
+		<p><%= simple_format(@case.holding) %></p>
+		<h2 class="bg-secondary text-secondary-content px-4 py-2 rounded mb-2 inline-block border-l-4 border-primary ml-[-1rem]">Rule of Law</h2>
+		<p><%= simple_format(@case.rule_of_law) %></p>
+		<h2 class="bg-secondary text-secondary-content px-4 py-2 rounded mb-2 inline-block border-l-4 border-primary ml-[-1rem]">Reasoning (Application)</h2>
+		<p><%= simple_format(@case.reasoning) %></p>
+		<h2 class="bg-secondary text-secondary-content px-4 py-2 rounded mb-2 inline-block border-l-4 border-primary ml-[-1rem]">Conclusion</h2>
+		<p><%= simple_format(@case.conclusion) %></p>
+		<% if @case.concurring_opinions.present? %>
+			  <h2 class="bg-secondary text-secondary-content px-4 py-2 rounded mb-2 inline-block border-l-4 border-primary ml-[-1rem]">Concurring Opinions</h2>
+			<p><%= simple_format(@case.concurring_opinions) %></p>
+		<% end %>
+		<% if @case.dissenting_opinions.present? %>
+			  s<h2 class="bg-secondary text-secondary-content px-4 py-2 rounded mb-2 inline-block border-l-4 border-primary ml-[-1rem]">Dissenting Opinions</h2>
+			<p><%= simple_format(@case.dissenting_opinions) %></p>
+		<% end %>
+	</div>
+	<div class="flex gap-4 mt-8">
+		<%= link_to "Back to Cases", cases_path, class: "btn btn-ghost" %>
+		<%= link_to "New Case", new_case_path, class: "btn btn-primary" %>
+	</div>
+</div>

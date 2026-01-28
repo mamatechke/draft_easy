@@ -16,8 +16,10 @@
 #
 #  index_users_on_email  (email) UNIQUE
 #
+
 class User < ApplicationRecord
   has_secure_password
+  has_many :cases, dependent: :destroy
 
   generates_token_for :email_verification, expires_in: 2.days do
     email

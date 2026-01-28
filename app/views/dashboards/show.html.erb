@@ -1,0 +1,72 @@
+<div class="container mx-auto max-w-4xl py-10 px-4">
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
+
+      <!-- Stats as Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="card bg-primary text-primary-content shadow">
+          <div class="card-body items-center text-center">
+            <div class="text-lg font-semibold">Total Cases</div>
+            <div class="text-4xl font-bold"><%= @stats[:total] %></div>
+          </div>
+        </div>
+        <div class="card bg-secondary text-secondary-content shadow">
+          <div class="card-body items-center text-center">
+            <div class="text-lg font-semibold">Cases This Month</div>
+            <div class="text-4xl font-bold"><%= @stats[:this_month] %></div>
+          </div>
+        </div>
+        <div class="card bg-accent text-accent-content shadow">
+          <div class="card-body items-center text-center">
+            <div class="text-lg font-semibold">Jurisdictions</div>
+            <div class="text-4xl font-bold"><%= @stats[:jurisdictions] %></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Cases -->
+      <div class="card bg-base-200 shadow mb-8">
+        <div class="card-body">
+          <div class="flex justify-between items-center mb-2">
+            <h2 class="card-title">Recent Cases</h2>
+            <%= link_to "All Cases", cases_path, class: "btn btn-outline btn-sm" %>
+          </div>
+          <% if @recent_cases.any? %>
+            <div class="overflow-x-auto">
+              <table class="table w-full">
+                <thead>
+                  <tr>
+                    <th>Case Name</th>
+                    <th>Jurisdiction</th>
+                    <th>Year</th>
+                    <th>Last Updated</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @recent_cases.each do |c| %>
+                    <tr>
+                      <td class="font-semibold"><%= c.case_name %></td>
+                      <td><%= c.jurisdiction %></td>
+                      <td><%= c.decision_year %></td>
+                      <td><%= time_ago_in_words(c.updated_at) %> ago</td>
+                      <td><%= link_to "View", case_path(c), class: "btn btn-xs btn-primary" %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="card bg-base-100 shadow">
+        <div class="card-body flex flex-col md:flex-row gap-4">
+          <button class="btn btn-secondary" disabled>Upload Judgment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

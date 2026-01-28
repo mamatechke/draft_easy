@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :cases, only: [:new, :create, :index, :show]
   extend Authenticator
 
   # authentification
@@ -28,10 +29,12 @@ Rails.application.routes.draw do
   sitepress_pages
 
   # resources
-  namespace :user do
-    resource :dashboard, only: [:show]
-    resources :sessions, only: [:index]
-  end
+  resource :dashboard, only: [:show]
+
+  # Optionally, set dashboard as root for authenticated users (pseudo-code, see Devise or custom logic)
+  # authenticated :user do
+  #   root to: 'dashboards#show', as: :authenticated_root
+  # end
 
   # health check
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
