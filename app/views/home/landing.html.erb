@@ -1,0 +1,157 @@
+<main class="bg-base-100">
+
+  <!-- HERO -->
+  <section class="hero min-h-screen bg-gradient-to-br from-base-100 to-base-200 px-4">
+    <div class="hero-content text-center max-w-4xl flex flex-col gap-8">
+
+      <%= image_tag "drafteasylogo.png",
+        alt: "DraftEase Logo",
+        class: "h-24 sm:h-28 md:h-32 mx-auto" %>
+
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-primary leading-tight">
+        AI-Assisted Award & Judgment Drafting
+      </h1>
+
+      <p class="text-lg sm:text-xl text-base-content/80 max-w-2xl mx-auto">
+        DraftEase helps judges, lawyers, arbitrators, and mediators draft
+        high-quality awards and judgments faster — without compromising
+        accuracy or confidentiality.
+      </p>
+
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <%= link_to "Start Free Trial",
+          sign_up_path,
+          class: "btn btn-primary btn-lg w-full sm:w-auto" %>
+
+        <%= link_to "Request Early Access",
+          "#early-access",
+          class: "btn btn-outline btn-secondary btn-lg w-full sm:w-auto" %>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VALUE DELIVERY -->
+  <section class="py-20 bg-base-100 px-4">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+        What DraftEase Delivers
+      </h2>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+        <% [
+          ["🔒", "Secure Document Uploads", "Encrypted storage with immutable originals and full audit trails."],
+          ["🤖", "AI Summaries", "Structured, one-click summaries of facts, claims, and arguments."],
+          ["📚", "Precedent Search", "Relevant case law from Kenya Law Reports and trusted public sources."],
+          ["📝", "Draft Generation & Editing", "Professional draft awards tailored to your style, exportable to Word or PDF."],
+          ["📁", "Case Management", "Create, track, and complete cases with deadlines in one place."]
+        ].each do |icon, title, description| %>
+
+          <div class="card bg-base-200 shadow-md hover:shadow-lg transition p-6 text-center">
+            <div class="text-4xl mb-3"><%= icon %></div>
+            <h3 class="font-semibold text-lg mb-2"><%= title %></h3>
+            <p class="text-base-content/70"><%= description %></p>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="py-20 bg-base-200 px-4">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+        Security & Confidentiality
+      </h2>
+
+      <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 text-center">
+
+        <div class="card bg-base-100 shadow p-6">
+          <div class="text-4xl mb-2">🔒</div>
+          <h3 class="font-semibold mb-2">End-to-End Encryption</h3>
+          <p class="text-base-content/80">
+            Data encrypted at rest and in transit.
+          </p>
+        </div>
+
+        <div class="card bg-base-100 shadow p-6">
+          <div class="text-4xl mb-2">🗂️</div>
+          <h3 class="font-semibold mb-2">Private Workspaces</h3>
+          <p class="text-base-content/80">
+            Each drafter operates in a fully isolated environment.
+          </p>
+        </div>
+
+        <div class="card bg-base-100 shadow p-6">
+          <div class="text-4xl mb-2">📝</div>
+          <h3 class="font-semibold mb-2">Audit Trails</h3>
+          <p class="text-base-content/80">
+            Full traceability for compliance and peace of mind.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="py-20 bg-base-100 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-10">
+        Who DraftEase Is For
+      </h2>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        <span class="badge badge-lg badge-primary">Lawyers</span>
+        <span class="badge badge-lg badge-secondary">Judges</span>
+        <span class="badge badge-lg badge-accent">Arbitrators</span>
+        <span class="badge badge-lg badge-neutral">Mediators</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING TEASER -->
+  <section id="early-access" class="py-20 bg-base-200 px-4">
+    <div class="max-w-xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">
+        Simple, Transparent Pricing
+      </h2>
+
+      <p class="text-base-content/80 mb-8">
+        Start with a free trial. Paid subscription tiers launching soon.
+      </p>
+
+      <%= link_to "Join Early Access",
+        "#",
+        class: "btn btn-primary btn-lg w-full sm:w-auto" %>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t bg-base-100 px-4 py-10">
+    <div class="max-w-6xl mx-auto grid gap-6 md:grid-cols-3 items-center">
+
+      <div class="flex items-center gap-3 justify-center md:justify-start">
+        <%= image_tag "drafteasylogo.png",
+          alt: "DraftEase Logo",
+          class: "h-8" %>
+        <span class="font-semibold text-lg">DraftEase</span>
+      </div>
+
+      <div class="flex justify-center gap-6">
+        <%= link_to "Privacy", "#", class: "link link-hover" %>
+        <%= link_to "Terms", "#", class: "link link-hover" %>
+        <%= link_to "Contact", "#", class: "link link-hover" %>
+      </div>
+
+      <div class="text-sm text-base-content/70 text-center md:text-right">
+        © <%= Time.current.year %> DraftEase. All rights reserved.
+      </div>
+
+    </div>
+  </footer>
+
+</main>
