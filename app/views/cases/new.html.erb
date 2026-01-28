@@ -11,19 +11,19 @@
 <% end %>
 
 
+<!-- Breadcrumbs -->
+<nav class="mb-6">
+	<div class="card bg-base-200 shadow-sm p-2">
+		<ul class="breadcrumbs flex items-center gap-2 text-sm m-0">
+			<li><%= link_to 'Dashboard', dashboard_path, class: 'link link-hover' %></li>
+			<li><svg class="inline w-4 h-4 text-base-content/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></li>
+			<li><%= link_to 'Cases', cases_path, class: 'link link-hover' %></li>
+			<li><svg class="inline w-4 h-4 text-base-content/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></li>
+			<li class="text-primary font-semibold">New Case Brief</li>
+		</ul>
+	</div>
+</nav>
 <div class="max-w-2xl mx-auto mt-10 p-8 bg-base-100 rounded-lg shadow">
-	<!-- Breadcrumbs -->
-	<nav class="mb-6">
-		<div class="card bg-base-200 shadow-sm p-2">
-			<ul class="breadcrumbs flex items-center gap-2 text-sm m-0">
-				<li><%= link_to 'Dashboard', dashboard_path, class: 'link link-hover' %></li>
-				<li><svg class="inline w-4 h-4 text-base-content/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></li>
-				<li><%= link_to 'Cases', cases_path, class: 'link link-hover' %></li>
-				<li><svg class="inline w-4 h-4 text-base-content/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></li>
-				<li class="text-primary font-semibold">New Case Brief</li>
-			</ul>
-		</div>
-	</nav>
 	<h1 class="text-2xl font-bold mb-6">New Case Brief</h1>
 	<%= form_with(model: @case, local: true, data: { turbo: false }, class: "flex flex-col gap-8", multipart: true) do |form| %>
 		<!-- Case Identification -->

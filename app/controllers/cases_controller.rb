@@ -1,6 +1,26 @@
 class CasesController < ApplicationController
   before_action :require_login
-  before_action :set_case, only: [:show, :download_pdf, :destroy]
+  before_action :set_case, only: [:show, :download_pdf, :destroy, :summarize, :download_summary]
+  # POST /cases/:id/summarize
+  def summarize
+    if @case.extracted_text.present?
+      summary = OllamaSummarizer.summarize(@case.extracted_text)
+      @case.update(summary: summary)
+      flash[:notice] = "Summary generated successfully."
+    else
+      flash[:alert] = "No extracted text available to summarize."
+    end
+    redirect_to @case
+  end
+
+  # GET /cases/:id/download_summary
+  def download_summary
+    if @case.summary.present?
+      send_data @case.summary, filename: "case_#{@case.id}_summary.txt", type: "text/plain", disposition: "attachment"
+    else
+      redirect_to @case, alert: "No summary available to download."
+    end
+  end
 
   # DELETE /cases/:id
   def destroy

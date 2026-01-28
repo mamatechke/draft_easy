@@ -6,16 +6,16 @@ This project is being built using this template, following a phased, user-driven
 Build in 3 phased releases with user co-creation: involve the lead user (lawyer) for feedback after every major milestone. Test functionality, gather input, iterate quickly.
 
 ### Timeline Target
-- **Phase 1 complete:** April 2026  
-- **Phase 2 complete:** May 2026  
-- **Phase 3 complete:** June/July 2026 (public launch)
+- <b>Phase 1 complete:</b> April 2026  
+- <b>Phase 2 complete:</b> May 2026  
+- <b>Phase 3 complete:</b> June/July 2026 (public launch)
 
 ---
 
 ## Phase 1: MVP Core Build (Internal Development)
-**Focus:** Deliver working core loop for one full case.
+<b>Focus:</b> Deliver working core loop for one full case.
 
-**Milestones & Testing**
+<b>Milestones & Testing</b>
 1. User auth + case creation + dashboard  
    → Demo to user → Feedback → Iterate
 2. Document upload + secure storage + text extraction  
@@ -27,17 +27,17 @@ Build in 3 phased releases with user co-creation: involve the lead user (lawyer)
 5. Draft generation + editing + export  
    → User tests full flow → Final MVP tweaks
 
-**Outcome:**  
+<b>Outcome:</b>  
 Private MVP ready for alpha testing. All core features functional.
 
 ---
 
 ## Phase 2: Alpha Release (Closed Testing)
 
-**Audience**
+<b>Audience</b>
 - Lead user + 3–5 invited drafters (lawyers/arbitrators you recruit)
 
-**Scope**
+<b>Scope</b>
 - Full MVP features  
 - Add basic notifications & reminders  
 - Add simple admin panel
@@ -216,3 +216,36 @@ Daisy-on-Rails is released under the [MIT License](https://opensource.org/licens
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at [github.com/adrienpoly/daisy-on-rails](https://github.com/adrienpoly/daisy-on-rails)
+
+---
+
+## Local AI Summarization (Ollama)
+
+This project supports free, local AI summarization using [Ollama](https://ollama.com/), which runs open-source LLMs on your own machine. This avoids OpenAI API costs and works offline.
+
+### Setup Ollama
+1. **Install Ollama**
+   - Visit https://ollama.com/download and follow the instructions for your OS (Linux, macOS, or Windows).
+   - Or, on Linux:
+     ```sh
+     curl -fsSL https://ollama.com/install.sh | sh
+     ```
+2. **Start Ollama**
+   - Run:
+     ```sh
+     ollama serve
+     ```
+   - This will start the Ollama server on `http://localhost:11434`.
+3. **Pull a model** (e.g., llama3 or mistral):
+   ```sh
+   ollama pull llama3
+   # or
+   ollama pull mistral
+   ```
+
+### Rails Integration
+- The Rails app will connect to Ollama's local API to summarize extracted case text.
+- No API key or cloud account required.
+- See `app/services/ollama_summarizer.rb` for implementation details.
+
+---

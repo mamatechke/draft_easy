@@ -31,6 +31,18 @@ class CasePdf < Prawn::Document
     section("Conclusion", @case.conclusion)
     section("Concurring Opinions", @case.concurring_opinions)
     section("Dissenting Opinions", @case.dissenting_opinions)
+
+    # Add AI Summary if present
+    if @case.summary.present?
+      move_down 16
+      text "AI Summary", style: :bold, size: 16, color: "00897B"
+      move_down 4
+      text @case.summary.to_s, size: 12, style: :italic
+    end
+
+    # Add future additions here (e.g., user notes, attachments)
+    # Example:
+    # section("User Notes", @case.user_notes)
   end
 
   def section(title, content)
