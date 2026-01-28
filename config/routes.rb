@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :cases, only: [:new, :create, :index, :show]
+  resources :cases, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
+    member do
+      get :download_pdf
+    end
+  end
   extend Authenticator
 
   # authentification

@@ -22,6 +22,7 @@
 #  conclusion          :text
 #  concurring_opinions :text
 #  dissenting_opinions :text
+#  extracted_text      :text
 #
 # Indexes
 #

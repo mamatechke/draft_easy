@@ -122,3 +122,7 @@ gem "solid_errors"
 gem "solid_cache"
 
 gem "solid_queue", github: "rails/solid_queue", branch: "main"
+
+gem "pdf-reader", "~> 2.15"
+
+gem "prawn", "~> 2.4"

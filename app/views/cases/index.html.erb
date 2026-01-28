@@ -10,7 +10,7 @@
 			<table class="table w-full">
 				<thead>
 					<tr>
-						<th>Case Name</th>
+						  <th>Case Name</th>
 						<th>Court</th>
 						<th>Year</th>
 						<th>Jurisdiction</th>
@@ -20,7 +20,12 @@
 				<tbody>
 					<% @cases.each_with_index do |c, i| %>
 						<tr class="even:bg-base-200 odd:bg-base-100">
-							<td class="font-semibold"><%= c.case_name %></td>
+							<td class="font-semibold">
+								<%= c.case_name %>
+								<% if c.created_at > 1.hour.ago %>
+									<span class="badge badge-success ml-2">new</span>
+								<% end %>
+							</td>
 							<td><%= c.court %></td>
 							<td><%= c.decision_year %></td>
 							<td><%= c.jurisdiction %></td>

@@ -1,4 +1,15 @@
 
+<% if flash[:notice].present? %>
+	<div class="alert alert-info mb-4">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
+<% if flash[:alert].present? %>
+	<div class="alert alert-error mb-4">
+		<%= flash[:alert] %>
+	</div>
+<% end %>
+
 
 <div class="max-w-2xl mx-auto mt-10 p-8 bg-base-100 rounded-lg shadow">
 	<!-- Breadcrumbs -->
@@ -14,14 +25,14 @@
 		</div>
 	</nav>
 	<h1 class="text-2xl font-bold mb-6">New Case Brief</h1>
-	<%= form_with(model: @case, local: true, class: "flex flex-col gap-8") do |form| %>
+	<%= form_with(model: @case, local: true, data: { turbo: false }, class: "flex flex-col gap-8", multipart: true) do |form| %>
 		<!-- Case Identification -->
 		<div>
 			<h2 class="font-semibold mb-2">Case Identification</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 				<div class="form-control w-full">
 					<%= form.label :case_name, class: "label" %>
-					<%= form.text_field :case_name, class: "input input-bordered w-full", required: true, autofocus: true %>
+					<%= form.text_field :case_name, class: "input input-bordered w-full", autofocus: true %>
 				</div>
 				<div class="form-control w-full">
 					<%= form.label :citation, class: "label" %>
@@ -97,9 +108,15 @@
 			</div>
 		</div>
 
+		<!-- Document Upload -->
+		<div class="form-control w-full">
+			<%= form.label :document, "Attach Document (PDF, DOCX, TXT)", class: "label" %>
+			<%= form.file_field :document, class: "file-input file-input-bordered w-full" %>
+		</div>
+
 		<div class="flex gap-4 justify-end mt-6">
 			<%= link_to "Cancel", cases_path, class: "btn btn-ghost" %>
-			<%= form.submit "Create Case", class: "btn btn-primary" %>
+			<%= form.submit "Save Case", class: "btn btn-primary" %>
 		</div>
 	<% end %>
 </div>

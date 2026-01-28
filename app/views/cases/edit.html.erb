@@ -1,0 +1,110 @@
+<% if flash[:notice].present? %>
+  <div class="alert alert-info mb-4">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<% if flash[:alert].present? %>
+  <div class="alert alert-error mb-4">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<div class="max-w-2xl mx-auto mt-10 p-8 bg-base-100 rounded-lg shadow">
+  <h1 class="text-2xl font-bold mb-6">Edit Case Brief</h1>
+  <%= form_with(model: @case, local: true, data: { turbo: false }, class: "flex flex-col gap-8", multipart: true) do |form| %>
+    <!-- Case Identification -->
+    <div>
+      <h2 class="font-semibold mb-2">Case Identification</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="form-control w-full">
+          <%= form.label :case_name, class: "label" %>
+          <%= form.text_field :case_name, class: "input input-bordered w-full", autofocus: true %>
+        </div>
+        <div class="form-control w-full">
+          <%= form.label :citation, class: "label" %>
+          <%= form.text_field :citation, class: "input input-bordered w-full" %>
+        </div>
+        <div class="form-control w-full">
+          <%= form.label :court, class: "label" %>
+          <%= form.text_field :court, class: "input input-bordered w-full" %>
+        </div>
+        <div class="form-control w-full">
+          <%= form.label :jurisdiction, class: "label" %>
+          <%= form.text_field :jurisdiction, class: "input input-bordered w-full" %>
+        </div>
+        <div class="form-control w-full">
+          <%= form.label :decision_year, class: "label" %>
+          <%= form.number_field :decision_year, class: "input input-bordered w-full" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Procedural History -->
+    <div class="form-control w-full">
+      <%= form.label :procedural_history, class: "label" %>
+      <%= form.text_area :procedural_history, class: "textarea textarea-bordered w-full min-h-[80px]" %>
+    </div>
+
+    <!-- Facts -->
+    <div class="form-control w-full">
+      <%= form.label :facts, class: "label" %>
+      <%= form.text_area :facts, class: "textarea textarea-bordered w-full min-h-[80px]" %>
+    </div>
+
+    <!-- Issue -->
+    <div class="form-control w-full">
+      <%= form.label :legal_issue, class: "label" %>
+      <%= form.text_area :legal_issue, class: "textarea textarea-bordered w-full min-h-[80px]" %>
+    </div>
+
+    <!-- Holding -->
+    <div class="form-control w-full">
+      <%= form.label :holding, class: "label" %>
+      <%= form.text_area :holding, class: "textarea textarea-bordered w-full min-h-[80px]" %>
+    </div>
+
+    <!-- Rule of Law -->
+    <div class="form-control w-full">
+      <%= form.label :rule_of_law, class: "label" %>
+      <%= form.text_area :rule_of_law, class: "textarea textarea-bordered w-full min-h-[80px]" %>
+    </div>
+
+    <!-- Reasoning (Application) -->
+    <div class="form-control w-full">
+      <%= form.label :reasoning, class: "label" %>
+      <%= form.text_area :reasoning, class: "textarea textarea-bordered w-full min-h-[80px]" %>
+    </div>
+
+    <!-- Conclusion -->
+    <div class="form-control w-full">
+      <%= form.label :conclusion, class: "label" %>
+      <%= form.text_area :conclusion, class: "textarea textarea-bordered w-full min-h-[80px]" %>
+    </div>
+
+    <!-- Concurring / Dissenting Opinions -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="form-control w-full">
+        <%= form.label :concurring_opinions, class: "label" %>
+        <%= form.text_area :concurring_opinions, class: "textarea textarea-bordered w-full min-h-[60px]" %>
+      </div>
+      <div class="form-control w-full">
+        <%= form.label :dissenting_opinions, class: "label" %>
+        <%= form.text_area :dissenting_opinions, class: "textarea textarea-bordered w-full min-h-[60px]" %>
+      </div>
+    </div>
+
+    <!-- Document Upload -->
+    <div class="form-control w-full">
+      <%= form.label :document, "Attach Document (PDF, DOCX, TXT)", class: "label" %>
+      <%= form.file_field :document, class: "file-input file-input-bordered w-full" %>
+      <% if @case.document.attached? %>
+        <div class="mt-2 text-xs text-base-content/60">Current file: <%= @case.document.filename %></div>
+      <% end %>
+    </div>
+
+    <div class="flex gap-4 justify-end mt-6">
+      <%= link_to "Cancel", cases_path, class: "btn btn-ghost" %>
+      <%= form.submit "Save Changes", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

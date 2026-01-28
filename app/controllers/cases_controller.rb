@@ -1,6 +1,12 @@
 class CasesController < ApplicationController
   before_action :require_login
-  before_action :set_case, only: [:show]
+  before_action :set_case, only: [:show, :download_pdf, :destroy]
+
+  # DELETE /cases/:id
+  def destroy
+    @case.destroy
+    redirect_to cases_path, notice: "Case deleted."
+  end
 
   def new
     @case = Current.user.cases.new
@@ -8,10 +14,35 @@ class CasesController < ApplicationController
 
   def create
     @case = Current.user.cases.new(case_params)
+
+    # Save case and attached file
     if @case.save
+      # If PDF attached, extract and autofill fields, then redirect to edit for review
+      if @case.document.attached? && @case.document.content_type == "application/pdf"
+        text = CaseTextExtractor.extract(@case.document)
+        autofill = CasePdfAutoFiller.extract_fields(text)
+        @case.update(autofill.merge(extracted_text: text))
+        flash[:notice] = "Fields were auto-filled from your PDF. Please review and complete any missing information."
+        redirect_to edit_case_path(@case) and return
+      end
       redirect_to @case, notice: "Case created successfully."
     else
+      flash.now[:alert] = @case.errors.full_messages.join(", ")
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    @case = Current.user.cases.find(params[:id])
+  end
+
+  def update
+    @case = Current.user.cases.find(params[:id])
+    if @case.update(case_params)
+      redirect_to @case, notice: "Case updated successfully."
+    else
+      flash.now[:alert] = @case.errors.full_messages.join(", ")
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -22,6 +53,11 @@ class CasesController < ApplicationController
   def show
   end
 
+  def download_pdf
+    pdf = CasePdf.new(@case)
+    send_data pdf.render, filename: "case_#{@case.id}.pdf", type: "application/pdf", disposition: "attachment"
+  end
+
   private
 
   def set_case
@@ -29,7 +65,12 @@ class CasesController < ApplicationController
   end
 
   def case_params
-    params.require(:case).permit(:case_name, :citation, :court, :jurisdiction, :decision_year, :procedural_history, :facts, :legal_issue, :holding, :rule_of_law, :reasoning, :conclusion, :concurring_opinions, :dissenting_opinions)
+    params.require(:case).permit(
+      :case_name, :citation, :court, :jurisdiction, :decision_year,
+      :procedural_history, :facts, :legal_issue, :holding, :rule_of_law,
+      :reasoning, :conclusion, :concurring_opinions, :dissenting_opinions,
+      :document
+    )
   end
 
   def require_login

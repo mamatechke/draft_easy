@@ -22,6 +22,7 @@
 #  conclusion          :text
 #  concurring_opinions :text
 #  dissenting_opinions :text
+#  extracted_text      :text
 #
 # Indexes
 #
@@ -30,4 +31,7 @@
 
 class Case < ApplicationRecord
   belongs_to :user
+  has_one_attached :document
+
+  # Document text extraction is now handled in the controller after save.
 end
