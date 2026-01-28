@@ -1,9 +1,9 @@
 <div class="hero min-h-[calc(100vh-4rem)]">
   <div class="hero-content text-center">
     <div class="max-w-md">
-      <h1 class="text-5xl font-bold"><%= t(".title") %></h1>
-      <p class="py-6"><%= t(".subtitle") %></p>
-      <%= ui_button t(".cta_text"), url: page_path(:documentations) %>
+      <h1 class="text-5xl font-bold">Draft Easy</h1>
+      <p class="py-6">Your AI-powered legal drafting assistant. Upload, summarize, and generate legal drafts with ease.</p>
+      <%= link_to "Get Started", (Current.user ? user_dashboard_path : sign_in_path), class: "btn btn-primary btn-lg" %>
     </div>
   </div>
 </div>

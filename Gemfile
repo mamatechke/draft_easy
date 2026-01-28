@@ -1,18 +1,23 @@
+# Ensure Minitest 6.x for Rails 8 compatibility
+gem "minitest", "~> 6.0"
 source "https://rubygems.org"
 
 ruby "3.3.4"
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", github: "rails/rails", branch: "main"
+# Use the latest stable Rails version
+gem "rails", "~> 8.1.2"
 
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+# Use PostgreSQL as the database for Active Record (for Railway.app)
+gem "pg", ">= 1.4"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
+
+# Load environment variables from .env in development and test
+gem "dotenv-rails", groups: [:development, :test]
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
@@ -101,7 +106,6 @@ gem "dry-types", "~> 1.7"
 gem "avo", ">= 3.2"
 gem "ransack", "~> 4.1"
 
-gem "activerecord-enhancedsqlite3-adapter"
 # gem "litestream"
 
 # sitepress
@@ -118,5 +122,3 @@ gem "solid_errors"
 gem "solid_cache"
 
 gem "solid_queue", github: "rails/solid_queue", branch: "main"
-
-gem "mission_control-jobs", "~> 0.1.1"

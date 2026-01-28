@@ -1,3 +1,89 @@
+# Project Roadmap & Release Plan
+
+This project is being built using this template, following a phased, user-driven approach:
+
+### Overall Approach
+Build in 3 phased releases with user co-creation: involve the lead user (lawyer) for feedback after every major milestone. Test functionality, gather input, iterate quickly.
+
+### Timeline Target
+- **Phase 1 complete:** April 2026  
+- **Phase 2 complete:** May 2026  
+- **Phase 3 complete:** June/July 2026 (public launch)
+
+---
+
+## Phase 1: MVP Core Build (Internal Development)
+**Focus:** Deliver working core loop for one full case.
+
+**Milestones & Testing**
+1. User auth + case creation + dashboard  
+   → Demo to user → Feedback → Iterate
+2. Document upload + secure storage + text extraction  
+   → User tests uploading real (anonymized) files → Feedback
+3. AI summarization (OpenAI integration)  
+   → User reviews summaries on sample cases → Refine prompts
+4. Precedent search (Kenya Law scraping/parsing)  
+   → User validates results → Adjust search logic
+5. Draft generation + editing + export  
+   → User tests full flow → Final MVP tweaks
+
+**Outcome:**  
+Private MVP ready for alpha testing. All core features functional.
+
+---
+
+## Phase 2: Alpha Release (Closed Testing)
+
+**Audience**
+- Lead user + 3–5 invited drafters (lawyers/arbitrators you recruit)
+
+**Scope**
+- Full MVP features  
+- Add basic notifications & reminders  
+- Add simple admin panel
+
+**Process**
+- Deploy to Railway (private access)  
+- Weekly feedback sessions with testers  
+- Fix bugs, improve AI prompts, add small usability wins  
+- Test on real cases (confidentiality assured)
+
+**Milestones**
+1. Onboarding & first case tests
+2. AI accuracy feedback round
+3. Usability & export format fixes
+
+**Outcome:**  
+Stable, user-validated version ready for wider testing.
+
+---
+
+## Phase 3: Beta Release (Limited Public SaaS Launch)
+
+**Audience**
+- Up to 50 users (sign-up with waitlist or invite)  
+- Free trial period
+
+**Scope**
+- All MVP + Alpha improvements  
+- Add Stripe billing (free trial → paid tiers)  
+- Add basic analytics dashboard  
+- Polish UI & mobile responsiveness
+
+**Process**
+- Public sign-up with approval  
+- In-app feedback forms + monthly calls  
+- Monitor usage, fix scaling issues  
+- Final prompt tuning based on real data
+
+**Milestones**
+1. Billing live + first paid users
+2. Usage analytics review
+3. Final polish & security audit
+
+**Outcome:**  
+Production-ready SaaS launched July 2026, with proven value from real users. Ready for open growth.
+
 # Daisy-on-Rails: Ruby on Rails Starter Kit
 
 ## Introduction

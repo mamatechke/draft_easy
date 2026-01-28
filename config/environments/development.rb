@@ -1,5 +1,12 @@
 require "active_support/core_ext/integer/time"
 
+# Enable hotwire-livereload in development
+if defined?(HotwireLivereload)
+  HotwireLivereload.configure do |config|
+    # Default config is usually fine
+  end
+end
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
