@@ -1,0 +1,9 @@
+# Railway-specific database configuration
+# Railway provides DATABASE_URL automatically in production
+# No changes needed for default Rails config, but ensure ENV['DATABASE_URL'] is used in production.
+
+# Example (config/database.yml):
+production:
+  url: <%= ENV["DATABASE_URL"] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000

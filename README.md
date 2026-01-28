@@ -1,5 +1,8 @@
 # Project Roadmap & Release Plan
 
+## 🚀 Deploying to Railway.app
+See [RAILWAY.md](RAILWAY.md) for step-by-step Railway deployment instructions, environment variables, and important notes about AI summarization and PDF extraction.
+
 This project is being built using this template, following a phased, user-driven approach:
 
 ### Overall Approach
