@@ -1,0 +1,29 @@
+<!-- Breadcrumbs -->
+<nav class="mb-6">
+  <div class="card bg-base-200 shadow-sm p-2">
+    <ul class="breadcrumbs flex items-center gap-2 text-sm m-0">
+      <li><%= link_to 'Dashboard', dashboard_path, class: 'link link-hover' %></li>
+      <li><svg class="inline w-4 h-4 text-base-content/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></li>
+      <li class="text-primary font-semibold">Subscription</li>
+    </ul>
+  </div>
+</nav>
+
+<div class="max-w-2xl mx-auto mt-10 p-8 bg-base-100 rounded-lg shadow">
+  <h1 class="text-2xl font-bold mb-6">Subscription Status</h1>
+  <div class="card bg-base-200 p-4">
+    <p><strong>Email:</strong> <%= @user.email %></p>
+    <p><strong>Trial Active:</strong> <%= @user.trial_active? ? "Yes (ends #{ @user.trial_ends_at.strftime('%B %d, %Y') })" : "No" %></p>
+    <p><strong>Subscribed:</strong> <%= @user.subscribed? ? "Yes" : "No" %></p>
+  </div>
+  <% unless @user.subscribed? %>
+    <div class="mt-6">
+      <h2 class="text-lg font-semibold mb-4">Upgrade to Premium</h2>
+      <p class="mb-4">Subscribe to access unlimited cases and advanced features.</p>
+      <button class="btn btn-primary" onclick="alert('Stripe integration placeholder - redirect to payment')">Subscribe Now ($9.99/month)</button>
+    </div>
+  <% end %>
+  <div class="mt-8">
+    <%= link_to "Back to Dashboard", dashboard_path, class: "btn btn-ghost" %>
+  </div>
+</div>

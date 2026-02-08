@@ -1,5 +1,21 @@
 # Project Roadmap & Release Plan
 
+## Getting Started
+
+### Seeded User for Testing
+To test the application with sample data, use the following seeded user account:
+
+- **Email:** lawyer1@drafting.com
+- **Password:** password
+
+This account comes with 5 pre-loaded sample cases for demonstration purposes.
+
+### Local Development Setup
+1. Clone the repository
+2. Run `bin/setup` to install dependencies and set up the database
+3. Start the server with `bin/rails server`
+4. Visit `http://localhost:3000` and log in with the seeded user above
+
 ## 🚀 Deploying to Railway.app
 See [RAILWAY.md](RAILWAY.md) for step-by-step Railway deployment instructions, environment variables, and important notes about AI summarization and PDF extraction.
 
@@ -19,16 +35,19 @@ Build in 3 phased releases with user co-creation: involve the lead user (lawyer)
 <b>Focus:</b> Deliver working core loop for one full case.
 
 <b>Milestones & Testing</b>
+
 1. User auth + case creation + dashboard  
    → Demo to user → Feedback → Iterate
 2. Document upload + secure storage + text extraction  
    → User tests uploading real (anonymized) files → Feedback
 3. AI summarization (OpenAI integration)  
    → User reviews summaries on sample cases → Refine prompts
-4. Precedent search (Kenya Law scraping/parsing)  
-   → User validates results → Adjust search logic
-5. Draft generation + editing + export  
-   → User tests full flow → Final MVP tweaks
+4. User experience polish (notifications, reminders, simple admin panel)  
+   → Add basic notifications, reminders, and admin tools for smoother workflow
+5. Basic analytics & activity tracking  
+   → Track user actions and app usage for feedback
+6. Improved error handling & onboarding flows  
+   → Guide new users and handle errors gracefully
 
 <b>Outcome:</b>  
 Private MVP ready for alpha testing. All core features functional.
@@ -42,6 +61,11 @@ Private MVP ready for alpha testing. All core features functional.
 
 <b>Scope</b>
 - Full MVP features  
+- Precedent search (Kenya Law scraping/parsing)  
+   → User validates results → Adjust search logic
+- Draft generation + editing + export  
+   → User tests full flow → Final MVP tweaks
+- Refine AI prompts and search logic based on real user/lawyer feedback
 - Add basic notifications & reminders  
 - Add simple admin panel
 
@@ -185,7 +209,7 @@ To use this template for your project, follow these steps:
 
 4. **Rename the Application**
 
-   Look for DaisyOnRails and daisy_on_rails and replace with your app name (e.g. Myapp)
+   Look for Draft Easy and draft_easy and replace with your app name (e.g. Myapp)
 
 ## Initial Setup
 

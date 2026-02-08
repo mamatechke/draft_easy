@@ -10,18 +10,6 @@
     </ul>
   </div>
 </nav>
-<!-- Breadcrumbs -->
-<nav class="mb-6">
-  <div class="card bg-base-200 shadow-sm p-2">
-    <ul class="breadcrumbs flex items-center gap-2 text-sm m-0">
-      <li><%= link_to 'Dashboard', dashboard_path, class: 'link link-hover' %></li>
-      <li><svg class="inline w-4 h-4 text-base-content/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></li>
-      <li><%= link_to 'Cases', cases_path, class: 'link link-hover' %></li>
-      <li><svg class="inline w-4 h-4 text-base-content/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></li>
-      <li class="text-primary font-semibold"><%= @case.case_name.presence || 'Edit Case' %></li>
-    </ul>
-  </div>
-</nav>
 <% if flash[:notice].present? %>
   <div class="alert alert-info mb-4">
     <%= flash[:notice] %>
@@ -60,7 +48,21 @@
           <%= form.label :decision_year, class: "label" %>
           <%= form.number_field :decision_year, class: "input input-bordered w-full" %>
         </div>
+        <div class="form-control w-full">
+          <%= form.label :case_type, class: "label" %>
+          <%= form.select :case_type, [["Arbitration", "arbitration"], ["Litigation", "litigation"], ["Appeal", "appeal"]], class: "select select-bordered w-full" %>
+        </div>
+        <div class="form-control w-full">
+          <%= form.label :deadline, class: "label" %>
+          <%= form.date_field :deadline, class: "input input-bordered w-full" %>
+        </div>
       </div>
+    </div>
+
+    <!-- Parties -->
+    <div class="form-control w-full">
+      <%= form.label :parties, class: "label" %>
+      <%= form.text_area :parties, class: "textarea textarea-bordered w-full min-h-[80px]", placeholder: "e.g., Plaintiff: John Doe, Defendant: Jane Smith" %>
     </div>
 
     <!-- Procedural History -->

@@ -24,6 +24,11 @@
 #  dissenting_opinions :text
 #  extracted_text      :text
 #  summary             :text
+#  parties             :text
+#  case_type           :string
+#  draft_content       :text
+#  draft_style         :string
+#  deadline            :date
 #
 # Indexes
 #
@@ -33,6 +38,7 @@
 class Case < ApplicationRecord
   belongs_to :user
   has_one_attached :document
+  has_rich_text :draft_content
 
   # Document text extraction is now handled in the controller after save.
 end

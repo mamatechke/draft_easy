@@ -49,6 +49,12 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
+# Use Action Text for rich text editing [https://guides.rubyonrails.org/action_text_overview.html]
+gem "actiontext"
+
+# Use Caracal for Word document generation
+gem "caracal"
+
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
 
@@ -126,3 +132,5 @@ gem "solid_queue", github: "rails/solid_queue", branch: "main"
 gem "pdf-reader", "~> 2.15"
 
 gem "prawn", "~> 2.4"
+
+gem "omniauth-google-oauth2", "~> 1.2"

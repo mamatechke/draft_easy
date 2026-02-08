@@ -24,6 +24,11 @@
 #  dissenting_opinions :text
 #  extracted_text      :text
 #  summary             :text
+#  parties             :text
+#  case_type           :string
+#  draft_content       :text
+#  draft_style         :string
+#  deadline            :date
 #
 # Indexes
 #

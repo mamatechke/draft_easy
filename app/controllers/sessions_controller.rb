@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   layout "authentification"
   before_action :redirect_if_signed_in, only: %i[new]
 
-  skip_before_action :authenticate!, only: %i[new create]
+  skip_before_action :authenticate!, only: %i[new create omniauth]
 
   before_action :set_session, only: :destroy
 
@@ -21,9 +21,21 @@ class SessionsController < ApplicationController
     end
   end
 
+  def omniauth
+    begin
+      auth = request.env['omniauth.auth']
+      user = User.from_omniauth(auth)
+      @session = user.sessions.create!
+      cookies.signed.permanent[:session_token] = {value: @session.id, httponly: true}
+      redirect_to dashboard_path, notice: "Signed in with Google successfully"
+    rescue
+      redirect_to sign_in_path, alert: "Google authentication failed"
+    end
+  end
+
   def destroy
     @session.destroy
-    redirect_back(fallback_location: user_sessions_path, notice: "That session has been logged out")
+    redirect_back(fallback_location: dashboard_path, notice: "That session has been logged out")
   end
 
   private

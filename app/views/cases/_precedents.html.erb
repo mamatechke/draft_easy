@@ -1,0 +1,18 @@
+<% if precedents.present? %>
+  <h2 class="card-title">Precedent Results (<%= precedents.size %> found)</h2>
+  <div class="space-y-4">
+    <% precedents.each do |p| %>
+      <div class="card bg-base-200 p-4">
+        <h3 class="font-semibold"><%= link_to p[:title], p[:link], target: "_blank", class: "link link-primary" %></h3>
+        <p class="text-sm text-base-content/70"><%= p[:summary] %></p>
+        <div class="flex gap-2 mt-2">
+          <% p[:tags].each do |tag| %>
+            <span class="badge badge-outline"><%= tag %></span>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% elsif query.present? %>
+  <p class="text-base-content/60">No precedents found for "<%= query %>". Try a different search term.</p>
+<% end %>

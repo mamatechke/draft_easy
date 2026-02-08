@@ -1,11 +1,24 @@
+# SaaS landing page
 Rails.application.routes.draw do
+  get "subscriptions/index"
+  get "deadlines/index"
+  get "landing", to: "home#landing", as: :landing
+  # Route for testing in-app notifications
+  get "notify_test", to: "home#notify_test"
+  # Route for testing email notifications
+  get "email_notify_test", to: "home#email_notify_test"
   resources :cases, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
     member do
       get :download_pdf
       post :summarize
       get :download_summary
+      post :search_precedents
+      post :generate_draft
+      get :export_word
     end
   end
+  resources :deadlines, only: [:index]
+  resources :subscriptions, only: [:index]
   extend Authenticator
 
   # authentification
@@ -14,7 +27,10 @@ Rails.application.routes.draw do
   get "sign_up", to: "registrations#new"
   post "sign_up", to: "registrations#create"
 
-  resources :sessions, only: [:show, :destroy]
+  # OAuth
+  get '/auth/:provider/callback', to: 'sessions#omniauth'
+
+  resources :sessions, only: [:destroy]
   resource :password, only: [:edit, :update]
 
   namespace :identity do
@@ -48,5 +64,13 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", :as => :rails_health_check
 
   # Defines the root path route ("/")
-  root "home#show"
+  authenticated_root = lambda do
+    if Current.user
+      dashboard_path
+    else
+      landing_path
+    end
+  end
+
+  root to: "home#landing"
 end

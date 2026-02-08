@@ -25,10 +25,11 @@
 			<span><strong>Court:</strong> <%= @case.court %></span>
 			<span><strong>Year:</strong> <%= @case.decision_year %></span>
 			<span><strong>Jurisdiction:</strong> <%= @case.jurisdiction %></span>
+			<span><strong>Type:</strong> <%= @case.case_type&.titleize %></span>
 		</div>
 	</div>
 	<div class="mb-4">
-		<strong>Citation:</strong> <%= @case.citation %>
+		<strong>Parties:</strong> <%= simple_format(@case.parties) %>
 	</div>
 	<div class="prose max-w-none">
 		<%# IRAC Method %>
@@ -82,6 +83,55 @@
 				   <div class="prose max-w-none">
 					   <%= simple_format(@case.summary.to_s.gsub(/\*\*(.+?)\*\*/, '<b>\\1</b>')) .html_safe %>
 				   </div>
+			</div>
+		</div>
+	<% end %>
+
+	<!-- Precedent Search -->
+	<div class="card bg-base-100 shadow mb-6" id="precedents-section">
+		<div class="card-body">
+			<h2 class="card-title">Search Kenya Law Precedents</h2>
+			<%= form_with url: search_precedents_case_path(@case), method: :post, data: { turbo: true }, class: "flex gap-2 mb-4" do |f| %>
+				<%= f.text_field :query, placeholder: "e.g., arbitration fairness", class: "input input-bordered flex-1" %>
+				<%= f.submit "Search", class: "btn btn-primary" %>
+			<% end %>
+			<%= render "precedents", precedents: @precedents || [], query: params[:query] %>
+		</div>
+	</div>
+
+	<!-- Draft Generation -->
+	<% if @case.summary.present? %>
+		<div class="card bg-base-100 shadow mb-6">
+			<div class="card-body">
+				<h2 class="card-title">Generate Draft</h2>
+				<%= form_with url: generate_draft_case_path(@case), method: :post, class: "space-y-4" do |f| %>
+					<div class="form-control">
+						<%= f.label :draft_style, "Draft Style", class: "label" %>
+						<%= f.select :draft_style, [["Formal Judgment", "formal"], ["Concise Legal", "concise"], ["Standard", "standard"]], class: "select select-bordered" %>
+					</div>
+					<div class="form-control">
+						<%= f.label :selected_precedents, "Selected Precedents (optional)", class: "label" %>
+						<%= f.text_area :selected_precedents, placeholder: "Paste relevant precedent summaries here", class: "textarea textarea-bordered", rows: 3 %>
+					</div>
+					<%= f.submit "Generate Draft", class: "btn btn-success", data: { disable_with: "Generating..." } %>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+
+	<!-- Draft Display and Editor -->
+	<% if @case.draft_content.present? %>
+		<div class="card bg-base-200 shadow mb-6">
+			<div class="card-body">
+				<h2 class="card-title">Draft (<%= @case.draft_style&.titleize %>)</h2>
+				<%= form_with model: @case, url: case_path(@case), method: :patch, local: true do |f| %>
+					<%= f.rich_text_area :draft_content, class: "trix-content" %>
+					<div class="flex gap-2 mt-4">
+						<%= f.submit "Save Draft", class: "btn btn-primary" %>
+						<%= link_to "Export to PDF", download_pdf_case_path(@case), class: "btn btn-secondary" %>
+						<%= link_to "Export to Word", export_word_case_path(@case), class: "btn btn-info" %>
+					</div>
+				<% end %>
 			</div>
 		</div>
 	<% end %>

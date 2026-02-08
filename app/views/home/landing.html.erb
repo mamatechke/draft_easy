@@ -2,30 +2,35 @@
 
   <!-- HERO -->
   <section class="hero min-h-screen bg-gradient-to-br from-base-100 to-base-200 px-4">
-    <div class="hero-content text-center max-w-4xl flex flex-col gap-8">
+    <div class="hero-content text-center max-w-5xl flex flex-col gap-8">
 
       <%= image_tag "drafteasylogo.png",
         alt: "DraftEase Logo",
-        class: "h-24 sm:h-28 md:h-32 mx-auto" %>
+        class: "h-24 sm:h-28 md:h-32 mx-auto mb-4" %>
 
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-primary leading-tight">
-        AI-Assisted Award & Judgment Drafting
+      <div class="badge badge-primary badge-lg mb-4">AI-Powered Legal Drafting</div>
+
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary leading-tight">
+        Draft Awards & Judgments in Minutes
       </h1>
 
-      <p class="text-lg sm:text-xl text-base-content/80 max-w-2xl mx-auto">
-        DraftEase helps judges, lawyers, arbitrators, and mediators draft
-        high-quality awards and judgments faster — without compromising
-        accuracy or confidentiality.
+      <p class="text-lg sm:text-xl md:text-2xl text-base-content/80 max-w-3xl mx-auto font-medium">
+        Transform complex legal cases into professional drafts with AI assistance.
+        Save hours on research, writing, and formatting while maintaining accuracy.
       </p>
 
-      <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
         <%= link_to "Start Free Trial",
           sign_up_path,
-          class: "btn btn-primary btn-lg w-full sm:w-auto" %>
+          class: "btn btn-primary btn-lg w-full sm:w-auto px-8 py-4 text-lg" %>
 
-        <%= link_to "Request Early Access",
-          "#early-access",
-          class: "btn btn-outline btn-secondary btn-lg w-full sm:w-auto" %>
+        <%= link_to "Watch Demo",
+          "#demo",
+          class: "btn btn-outline btn-secondary btn-lg w-full sm:w-auto px-8 py-4 text-lg" %>
+      </div>
+
+      <div class="mt-12 text-sm text-base-content/60">
+        Trusted by judges, lawyers, and legal professionals across Kenya
       </div>
 
     </div>

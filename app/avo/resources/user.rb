@@ -12,6 +12,8 @@ class Avo::Resources::User < Avo::BaseResource
     field :last_name, as: :text
     field :admin, as: :boolean, link_to_record: true
     field :verified, as: :boolean, hide_on: [:index]
+    field :trial_ends_at, as: :date_time
+    field :subscribed, as: :boolean
     field :sessions, as: :has_many
   end
 end

@@ -11,18 +11,6 @@
 <% end %>
 
 
-<!-- Breadcrumbs -->
-<nav class="mb-6">
-	<div class="card bg-base-200 shadow-sm p-2">
-		<ul class="breadcrumbs flex items-center gap-2 text-sm m-0">
-			<li><%= link_to 'Dashboard', dashboard_path, class: 'link link-hover' %></li>
-			<li><svg class="inline w-4 h-4 text-base-content/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></li>
-			<li><%= link_to 'Cases', cases_path, class: 'link link-hover' %></li>
-			<li><svg class="inline w-4 h-4 text-base-content/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></li>
-			<li class="text-primary font-semibold">New Case Brief</li>
-		</ul>
-	</div>
-</nav>
 <div class="max-w-2xl mx-auto mt-10 p-8 bg-base-100 rounded-lg shadow">
 	<h1 class="text-2xl font-bold mb-6">New Case Brief</h1>
 	<%= form_with(model: @case, local: true, data: { turbo: false }, class: "flex flex-col gap-8", multipart: true) do |form| %>
@@ -50,11 +38,22 @@
 					<%= form.label :decision_year, class: "label" %>
 					<%= form.number_field :decision_year, class: "input input-bordered w-full" %>
 				</div>
+				<div class="form-control w-full">
+					<%= form.label :case_type, class: "label" %>
+					<%= form.select :case_type, [["Arbitration", "arbitration"], ["Litigation", "litigation"], ["Appeal", "appeal"]], class: "select select-bordered w-full" %>
+				</div>
+				<div class="form-control w-full">
+					<%= form.label :deadline, class: "label" %>
+					<%= form.date_field :deadline, class: "input input-bordered w-full" %>
+				</div>
 			</div>
 		</div>
 
-
-		<!-- Procedural History -->
+		<!-- Parties -->
+		<div class="form-control w-full">
+			<%= form.label :parties, class: "label" %>
+			<%= form.text_area :parties, class: "textarea textarea-bordered w-full min-h-[80px]", placeholder: "e.g., Plaintiff: John Doe, Defendant: Jane Smith" %>
+		</div>
 		<div class="form-control w-full">
 			<%= form.label :procedural_history, class: "label" %>
 			<%= form.text_area :procedural_history, class: "textarea textarea-bordered w-full min-h-[80px]" %>

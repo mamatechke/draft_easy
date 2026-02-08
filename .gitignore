@@ -43,3 +43,11 @@
 .DS_Store
 
 .kamal/secrets
+
+# Ignore key files for decrypting credentials and more.
+/config/*.key
+
+
+# Ignore key files for decrypting credentials and more.
+/config/credentials/*.key
+

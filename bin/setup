@@ -2,7 +2,7 @@
 require "fileutils"
 
 APP_ROOT = File.expand_path("..", __dir__)
-APP_NAME = "daisy_on_rails"
+APP_NAME = "draft_easy"
 
 def system!(*args)
   system(*args, exception: true)

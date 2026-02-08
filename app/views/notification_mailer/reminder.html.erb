@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Deadline Reminder</h1>
+    <p>Dear <%= @user.first_name %>,</p>
+    <p>This is a reminder that the deadline for case "<%= @case.case_name %>" is approaching.</p>
+    <p>Deadline: <%= @case.deadline.strftime('%B %d, %Y') %></p>
+    <p>Please review and take necessary action.</p>
+    <p>Best regards,<br>DraftEase Team</p>
+  </body>
+</html>
