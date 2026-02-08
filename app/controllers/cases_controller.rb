@@ -24,6 +24,14 @@ class CasesController < ApplicationController
 
   # POST /cases/:id/search_precedents
   def search_precedents
+    unless Current.user.can_search_precedents?
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("precedents-section", partial: "cases/precedents", locals: { precedents: [], query: "", error: "You have reached your precedent search limit. Please upgrade your plan." }) }
+        format.html { redirect_to @case, alert: "You have reached your precedent search limit. Please upgrade your plan." }
+      end
+      return
+    end
+
     query = params[:query].presence || ""
     @precedents = PrecedentSearcher.search(query)
     respond_to do |format|
@@ -80,6 +88,10 @@ class CasesController < ApplicationController
   end
 
   def create
+    unless Current.user.can_create_case?
+      redirect_to cases_path, alert: "You have reached your case limit. Please upgrade your plan." and return
+    end
+
     @case = Current.user.cases.new(case_params)
 
     # Save case and attached file

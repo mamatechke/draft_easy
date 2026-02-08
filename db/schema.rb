@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_08_133542) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_08_185720) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -180,6 +180,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_08_133542) do
     t.index ["user_id"], name: "index_cases_on_user_id"
   end
 
+  create_table "plans", force: :cascade do |t|
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.string "currency"
+    t.text "features"
+    t.string "interval"
+    t.string "name"
+    t.string "stripe_price_id"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "ip_address"
@@ -196,7 +207,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_08_133542) do
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
     t.string "password_digest", null: false
+    t.integer "plan_id"
     t.string "provider"
+    t.string "stripe_customer_id"
     t.boolean "subscribed"
     t.datetime "trial_ends_at"
     t.string "uid"

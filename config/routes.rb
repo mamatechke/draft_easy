@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "notify_test", to: "home#notify_test"
   # Route for testing email notifications
   get "email_notify_test", to: "home#email_notify_test"
+  get "trial_notify_test", to: "home#trial_notify_test"
   resources :cases, only: [:new, :create, :index, :show, :destroy, :edit, :update] do
     member do
       get :download_pdf
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
     end
   end
   resources :deadlines, only: [:index]
-  resources :subscriptions, only: [:index]
+  resources :subscriptions, only: [:index, :create]
   extend Authenticator
 
   # authentification

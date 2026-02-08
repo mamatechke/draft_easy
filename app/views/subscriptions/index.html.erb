@@ -18,9 +18,21 @@
   </div>
   <% unless @user.subscribed? %>
     <div class="mt-6">
-      <h2 class="text-lg font-semibold mb-4">Upgrade to Premium</h2>
-      <p class="mb-4">Subscribe to access unlimited cases and advanced features.</p>
-      <button class="btn btn-primary" onclick="alert('Stripe integration placeholder - redirect to payment')">Subscribe Now ($9.99/month)</button>
+      <h2 class="text-lg font-semibold mb-4">Available Plans</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <% @plans.each do |plan| %>
+          <div class="card bg-base-200 p-4">
+            <h3 class="text-xl font-bold"><%= plan.name %></h3>
+            <p class="text-2xl font-semibold">$<%= plan.price_in_dollars %>/<%= plan.interval %></p>
+            <p class="text-sm mt-2"><%= plan.features %></p>
+            <% if plan.name == "Free" %>
+              <p class="text-green-600 font-semibold mt-2">Current Plan</p>
+            <% else %>
+              <%= button_to "Subscribe", subscriptions_path(plan_id: plan.id), method: :post, class: "btn btn-primary mt-4" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
   <div class="mt-8">

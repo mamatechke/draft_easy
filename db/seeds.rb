@@ -1,3 +1,26 @@
+puts "Seeding plans"
+Plan.destroy_all
+
+free_plan = Plan.create!(
+  name: "Free",
+  stripe_price_id: nil,
+  amount: 0,
+  currency: "usd",
+  interval: "month",
+  features: "5 cases, Basic AI summarization, 1 precedent search per case"
+)
+
+pro_plan = Plan.create!(
+  name: "Pro",
+  stripe_price_id: "price_pro_monthly", # Replace with actual Stripe price ID
+  amount: 2900, # $29.00
+  currency: "usd",
+  interval: "month",
+  features: "Unlimited cases, Advanced AI features, Unlimited precedent searches, Word export, Priority support"
+)
+
+puts "Seeded #{Plan.count} plans"
+
 if Rails.env.development?
   puts "Deleting all users except lawyer1@drafting.com in development environment only"
   User.where.not(email: "lawyer1@drafting.com").destroy_all
@@ -6,6 +29,7 @@ if Rails.env.development?
   user.last_name = "Drafting"
   user.password = "password123"
   user.verified = true
+  user.plan = pro_plan # Assign pro plan to seeded user
   user.save!
   puts "Seeded user #{user.email}"
 end

@@ -20,6 +20,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :cases, dependent: :destroy
+  belongs_to :plan, optional: true
 
   generates_token_for :email_verification, expires_in: 2.days do
     email
@@ -41,6 +42,13 @@ class User < ApplicationRecord
 
   after_update if: :password_digest_previously_changed? do
     sessions.where.not(id: Current.session).delete_all
+  end
+
+  before_create :set_trial_period
+
+  def set_trial_period
+    self.trial_ends_at = 30.days.from_now
+    self.plan = Plan.find_by(name: "Free") # Assign free plan initially
   end
 
   def self.from_omniauth(auth)
@@ -67,5 +75,23 @@ class User < ApplicationRecord
 
   def can_access?
     trial_active? || subscribed?
+  end
+
+  def cases_limit
+    plan&.name == "Pro" ? Float::INFINITY : 5
+  end
+
+  def precedent_searches_limit
+    plan&.name == "Pro" ? Float::INFINITY : 1
+  end
+
+  def can_create_case?
+    cases.count < cases_limit
+  end
+
+  def can_search_precedents?
+    # For simplicity, check if they have searched less than limit today
+    # In real app, track usage
+    true # Placeholder
   end
 end

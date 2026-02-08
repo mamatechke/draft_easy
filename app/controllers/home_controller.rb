@@ -25,4 +25,10 @@ class HomeController < ApplicationController
     end
     redirect_to root_path
   end
+
+  def trial_notify_test
+    TrialExpirationNotifierJob.perform_now
+    flash[:notice] = "Trial expiration notifications sent."
+    redirect_to root_path
+  end
 end
