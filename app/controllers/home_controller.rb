@@ -3,6 +3,11 @@ class HomeController < ApplicationController
 
   # Public SaaS landing page
   def landing
+    @plans = Plan.all
+  end
+
+  def features
+    @plans = Plan.all
   end
 
   def show

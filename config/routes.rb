@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "subscriptions/index"
   get "deadlines/index"
   get "landing", to: "home#landing", as: :landing
+  get "features", to: "home#features", as: :features
   # Route for testing in-app notifications
   get "notify_test", to: "home#notify_test"
   # Route for testing email notifications
