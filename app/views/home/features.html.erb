@@ -1,24 +1,24 @@
-<main class="bg-base-100 px-4 py-12">
+<main class="bg-white px-4 py-12">
   <div class="max-w-5xl mx-auto">
-    <h1 class="text-4xl font-bold text-center mb-6">Plan Features</h1>
-    <p class="text-center text-base-content/70 mb-8">Detailed feature breakdown for each plan. Click a plan from the pricing section to jump here.</p>
+    <h1 class="text-3xl font-bold text-center text-gray-900 mb-6">Plan Features</h1>
+    <p class="text-center text-gray-500 mb-8">Detailed feature breakdown for each plan. Click a plan from the pricing section to jump here.</p>
 
     <div class="grid gap-6 md:grid-cols-2">
       <% @plans.each do |plan| %>
-        <section id="<%= plan.name.parameterize %>" class="card bg-base-100 shadow-lg p-6">
-          <h2 class="text-2xl font-bold mb-2"><%= plan.name %></h2>
-          <div class="text-xl font-bold text-primary mb-4">USD <%= plan.amount / 100 %> <% if plan.amount > 0 %><span class="text-sm text-base-content/70">/<%= plan.interval %></span><% end %></div>
+        <section id="<%= plan.name.parameterize %>" class="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-2"><%= plan.name %></h2>
+          <div class="text-xl font-bold text-primary mb-4">USD <%= plan.amount / 100 %> <% if plan.amount > 0 %><span class="text-sm text-gray-500">/<%= plan.interval %></span><% end %></div>
 
-          <p class="mb-4 text-base-content/70"><%= plan.features %></p>
+          <p class="mb-4 text-gray-500"><%= plan.features %></p>
 
           <% if plan.name == 'Free' %>
-            <ul class="list-disc list-inside text-base-content/80 mb-4">
+            <ul class="list-disc list-inside text-gray-600 mb-4">
               <li>5 cases per month</li>
               <li>Basic AI summarization</li>
               <li>1 precedent search per case</li>
             </ul>
           <% elsif plan.name == 'Pro' %>
-            <ul class="list-disc list-inside text-base-content/80 mb-4">
+            <ul class="list-disc list-inside text-gray-600 mb-4">
               <li>Unlimited cases</li>
               <li>Advanced AI features (summaries, drafting, style tuning)</li>
               <li>Unlimited precedent searches</li>
@@ -28,13 +28,13 @@
           <% end %>
 
           <div class="flex gap-3">
-            <%= link_to 'Choose this plan', sign_up_path(plan: plan.name), class: 'btn btn-primary' %>
-            <%= link_to 'Back to pricing', landing_path, class: 'btn btn-ghost' %>
+            <%= link_to 'Choose this plan', sign_up_path(plan: plan.name), class: 'bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-purple-800 transition' %>
+            <%= link_to 'Back to pricing', landing_path, class: 'text-gray-600 hover:text-gray-900 text-sm font-medium' %>
           </div>
         </section>
       <% end %>
     </div>
 
-    <p class="text-center text-sm text-base-content/70 mt-8">All plans include secure document storage, AI assistance, and 24/7 support.</p>
+    <p class="text-center text-sm text-gray-500 mt-8">All plans include secure document storage, AI assistance, and 24/7 support.</p>
   </div>
 </main>

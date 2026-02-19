@@ -133,6 +133,4 @@ gem "pdf-reader", "~> 2.15"
 
 gem "prawn", "~> 2.4"
 
-gem "omniauth-google-oauth2", "~> 1.2"
-
 gem "stripe", "~> 10.0"

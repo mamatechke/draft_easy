@@ -1,32 +1,39 @@
-<h1>Reset your password</h1>
-
-<%= form_with(url: identity_password_reset_path, method: :patch) do |form| %>
-  <% if @user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% @user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+  <div class="max-w-sm w-full">
+    <div class="text-center mb-8">
+      <%= image_tag asset_path("drafteasylogo.png"), alt: "DraftEasy Logo", class: "h-16 mx-auto mb-4" %>
+      <h1 class="text-2xl font-bold text-gray-900">Reset Password</h1>
+      <p class="text-gray-500 mt-1">Enter your new password</p>
     </div>
-  <% end %>
 
-  <%= form.hidden_field :sid, value: params[:sid] %>
+    <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
+      <%= form_with(url: identity_password_reset_path, method: :patch, class: "flex flex-col gap-4") do |form| %>
+        <% if @user.errors.any? %>
+          <div class="bg-red-50 border border-red-200 rounded-md px-4 py-3 text-red-800 text-sm">
+            <h2 class="font-medium"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+            <ul class="mt-1 list-disc list-inside">
+              <% @user.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-  <div>
-    <%= form.label :password, "New password", style: "display: block" %>
-    <%= form.password_field :password, required: true, autofocus: true, autocomplete: "new-password" %>
-    <div>12 characters minimum.</div>
+        <%= form.hidden_field :sid, value: params[:sid] %>
+
+        <div>
+          <%= form.label :password, "New password", class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= form.password_field :password, required: true, autofocus: true, autocomplete: "new-password", class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border" %>
+          <p class="text-xs text-gray-500 mt-1">12 characters minimum.</p>
+        </div>
+
+        <div>
+          <%= form.label :password_confirmation, "Confirm new password", class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border" %>
+        </div>
+
+        <%= form.submit "Reset Password", class: "w-full bg-primary text-white py-2.5 px-4 rounded-md hover:bg-purple-800 transition font-medium mt-2" %>
+      <% end %>
+    </div>
   </div>
-
-  <div>
-    <%= form.label :password_confirmation, "Confirm new password", style: "display: block" %>
-    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
-  </div>
-
-  <div>
-    <%= form.submit "Save changes" %>
-  </div>
-<% end %>
+</div>

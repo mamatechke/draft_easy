@@ -4,12 +4,17 @@
     <%= render "layouts/head" %>
   </head>
 
-  <body class="min-h-[100vh-4rem]">
+  <body class="min-h-screen bg-gray-50 flex flex-col">
     <% unless controller_name == "home" && action_name == "landing" %>
       <%= render "shared/navbar" %>
+      <div class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <%= render "shared/flashes" %>
+        <%= yield %>
+      </div>
+      <%= render "shared/footer" %>
+    <% else %>
+      <%= yield %>
     <% end %>
-    <%= render "shared/flashes" %>
-    <%= yield %>
     <%= turbo_stream_from Current.user if Current.user %>
   </body>
 </html>

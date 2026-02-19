@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   layout "authentification"
   before_action :redirect_if_signed_in, only: %i[new]
 
-  skip_before_action :authenticate!, only: %i[new create omniauth]
+  skip_before_action :authenticate!, only: %i[new create]
 
   before_action :set_session, only: :destroy
 
@@ -18,18 +18,6 @@ class SessionsController < ApplicationController
       redirect_to dashboard_path, notice: "Signed in successfully"
     else
       redirect_to sign_in_path(email_hint: params[:email]), alert: "That email or password is incorrect"
-    end
-  end
-
-  def omniauth
-    begin
-      auth = request.env['omniauth.auth']
-      user = User.from_omniauth(auth)
-      @session = user.sessions.create!
-      cookies.signed.permanent[:session_token] = {value: @session.id, httponly: true}
-      redirect_to dashboard_path, notice: "Signed in with Google successfully"
-    rescue
-      redirect_to sign_in_path, alert: "Google authentication failed"
     end
   end
 

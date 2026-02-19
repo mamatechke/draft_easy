@@ -4,3 +4,15 @@
 
 @import "reset";
 @import "components/typography";
+
+details > summary {
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] > summary::-webkit-details-marker {
+  display: none;
+}

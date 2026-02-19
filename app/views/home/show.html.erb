@@ -1,13 +1,11 @@
-<div class="hero min-h-[calc(100vh-4rem)]">
-  <div class="hero-content text-center">
-    <div class="max-w-md">
-      <h1 class="text-5xl font-bold">Draft Easy</h1>
-      <p class="py-6">Your AI-powered legal drafting assistant. Upload, summarize, and generate legal drafts with ease.</p>
-      <%= link_to "Get Started", (Current.user ? user_dashboard_path : sign_in_path), class: "btn btn-primary btn-lg" %>
-      <div class="mt-6 flex flex-col gap-2">
-        <%= link_to "Test In-App Notification", notify_test_path, class: "btn btn-secondary" %>
-        <%= link_to "Test Email Notification", email_notify_test_path, class: "btn btn-accent" %>
-      </div>
+<div class="min-h-[calc(100vh-4rem)] flex items-center justify-center">
+  <div class="text-center max-w-md px-4">
+    <h1 class="text-4xl font-bold text-gray-900">Draft Easy</h1>
+    <p class="py-6 text-gray-600">Your AI-powered legal drafting assistant. Upload, summarize, and generate legal drafts with ease.</p>
+    <%= link_to "Get Started", (Current.user ? user_dashboard_path : sign_in_path), class: "bg-primary text-white px-6 py-3 rounded-md text-base font-medium hover:bg-purple-800 transition" %>
+    <div class="mt-6 flex flex-col gap-2">
+      <%= link_to "Test In-App Notification", notify_test_path, class: "bg-gray-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition" %>
+      <%= link_to "Test Email Notification", email_notify_test_path, class: "bg-teal-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-teal-700 transition" %>
     </div>
   </div>
 </div>

@@ -1,44 +1,54 @@
-<div class="container flex flex-col items-center mt-8">
+<div class="max-w-md mx-auto px-4 py-8">
+  <div class="mb-6">
+    <%= link_to "← Back to Dashboard", dashboard_path, class: "text-sm text-gray-500 hover:text-gray-700 mb-2 inline-block" %>
+    <h1 class="text-3xl font-bold text-gray-900">Change Password</h1>
+    <p class="text-gray-500 mt-1">Update your password</p>
+  </div>
 
-  <h1 class="text-center mb-8"><%= t(".title") %></h1>
+  <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
+    <%= form_with(url: password_path, method: :patch, class: "flex flex-col gap-4") do |form| %>
+      <% if @user.errors.any? %>
+        <div class="bg-red-50 border border-red-200 rounded-md px-4 py-3 text-red-800 text-sm">
+          <h2 class="font-medium"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+          <ul class="mt-1 list-disc list-inside">
+            <% @user.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <%= form_with(url: password_path, method: :patch, class: "flex flex-col max-w-sm gap-6 w-full") do |form| %>
-    <% if @user.errors.any? %>
-      <div style="color: red">
-        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <div>
+        <%= form.ui_password_field :password_challenge,
+              required: true,
+              autofocus: true,
+              label: false,
+              autocomplete: "current-password",
+              placeholder: t(".current_password") %>
+      </div>
 
-        <ul>
-          <% @user.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
+      <div>
+        <%= form.ui_password_field :password,
+              required: true,
+              autofocus: true,
+              label: false,
+              autocomplete: "new-password",
+              placeholder: t(".new_password") %>
+      </div>
+
+      <div>
+        <%= form.ui_password_field :password,
+              required: true,
+              autofocus: true,
+              label: false,
+              autocomplete: "new-password",
+              placeholder: t(".new_password_confirmation") %>
+      </div>
+
+      <div class="flex gap-3 mt-2">
+        <%= form.ui_submit t(".update_password"), class: "flex-1" %>
+        <%= link_to "Cancel", dashboard_path, class: "px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition" %>
       </div>
     <% end %>
-
-    <%= form.ui_password_field :password_challenge,
-          required: true,
-          autofocus: true,
-          label: false,
-          autocomplete: "current-password",
-          placeholder: t(".current_password") %>
-
-    <%= form.ui_password_field :password,
-          required: true,
-          autofocus: true,
-          label: false,
-          autocomplete: "new-password",
-          placeholder: t(".new_password") %>
-
-    <%= form.ui_password_field :password,
-          required: true,
-          autofocus: true,
-          label: false,
-          autocomplete: "new-password",
-          placeholder: t(".new_password_confirmation") %>
-
-    <div>
-      <%= form.ui_submit t(".update_password") %>
-      <%= ui_button t("cancel"), url: user_dashboard_path, kind: :primary, outline: true %>
-    </div>
-  <% end %>
+  </div>
 </div>

@@ -1,121 +1,121 @@
-
 <% if flash[:notice].present? %>
-	<div class="alert alert-info mb-4">
-		<%= flash[:notice] %>
-	</div>
+  <div class="max-w-2xl mx-auto mb-4 px-4">
+    <div class="bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 text-blue-800">
+      <%= flash[:notice] %>
+    </div>
+  </div>
 <% end %>
 <% if flash[:alert].present? %>
-	<div class="alert alert-error mb-4">
-		<%= flash[:alert] %>
-	</div>
+  <div class="max-w-2xl mx-auto mb-4 px-4">
+    <div class="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-red-800">
+      <%= flash[:alert] %>
+    </div>
+  </div>
 <% end %>
 
+<div class="max-w-2xl mx-auto px-4 py-6">
+  <div class="mb-6">
+    <%= link_to "← Back to Cases", cases_path, class: "text-sm text-gray-500 hover:text-gray-700 mb-2 inline-block" %>
+    <h1 class="text-3xl font-bold text-gray-900">New Case Brief</h1>
+    <p class="text-gray-500 mt-1">Fill in the details below to create a new case brief</p>
+  </div>
+  
+  <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
+    <%= form_with(model: @case, local: true, data: { turbo: false }, class: "flex flex-col gap-6", multipart: true) do |form| %>
+      <div>
+        <h2 class="text-base font-semibold text-gray-900 mb-4 pb-2 border-b border-gray-100">Case Identification</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <%= form.label :case_name, class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= form.text_field :case_name, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border", autofocus: true %>
+        </div>
+        <div>
+          <%= form.label :citation, class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= form.text_field :citation, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border" %>
+        </div>
+        <div>
+          <%= form.label :court, class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= form.text_field :court, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border" %>
+        </div>
+        <div>
+          <%= form.label :jurisdiction, class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= form.text_field :jurisdiction, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border" %>
+        </div>
+        <div>
+          <%= form.label :decision_year, class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= form.number_field :decision_year, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border" %>
+        </div>
+        <div>
+          <%= form.label :case_type, class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= form.select :case_type, [["Arbitration", "arbitration"], ["Litigation", "litigation"], ["Appeal", "appeal"]], {}, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border" %>
+        </div>
+        <div>
+          <%= form.label :deadline, class: "block text-sm font-medium text-gray-700 mb-1" %>
+          <%= form.date_field :deadline, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border" %>
+        </div>
+      </div>
+    </div>
 
-<div class="max-w-2xl mx-auto mt-10 p-8 bg-base-100 rounded-lg shadow">
-	<h1 class="text-2xl font-bold mb-6">New Case Brief</h1>
-	<%= form_with(model: @case, local: true, data: { turbo: false }, class: "flex flex-col gap-8", multipart: true) do |form| %>
-		<!-- Case Identification -->
-		<div>
-			<h2 class="font-semibold mb-2">Case Identification</h2>
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-				<div class="form-control w-full">
-					<%= form.label :case_name, class: "label" %>
-					<%= form.text_field :case_name, class: "input input-bordered w-full", autofocus: true %>
-				</div>
-				<div class="form-control w-full">
-					<%= form.label :citation, class: "label" %>
-					<%= form.text_field :citation, class: "input input-bordered w-full" %>
-				</div>
-				<div class="form-control w-full">
-					<%= form.label :court, class: "label" %>
-					<%= form.text_field :court, class: "input input-bordered w-full" %>
-				</div>
-				<div class="form-control w-full">
-					<%= form.label :jurisdiction, class: "label" %>
-					<%= form.text_field :jurisdiction, class: "input input-bordered w-full" %>
-				</div>
-				<div class="form-control w-full">
-					<%= form.label :decision_year, class: "label" %>
-					<%= form.number_field :decision_year, class: "input input-bordered w-full" %>
-				</div>
-				<div class="form-control w-full">
-					<%= form.label :case_type, class: "label" %>
-					<%= form.select :case_type, [["Arbitration", "arbitration"], ["Litigation", "litigation"], ["Appeal", "appeal"]], class: "select select-bordered w-full" %>
-				</div>
-				<div class="form-control w-full">
-					<%= form.label :deadline, class: "label" %>
-					<%= form.date_field :deadline, class: "input input-bordered w-full" %>
-				</div>
-			</div>
-		</div>
+    <div>
+      <%= form.label :parties, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= form.text_area :parties, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border min-h-[80px]", placeholder: "e.g., Plaintiff: John Doe, Defendant: Jane Smith" %>
+    </div>
 
-		<!-- Parties -->
-		<div class="form-control w-full">
-			<%= form.label :parties, class: "label" %>
-			<%= form.text_area :parties, class: "textarea textarea-bordered w-full min-h-[80px]", placeholder: "e.g., Plaintiff: John Doe, Defendant: Jane Smith" %>
-		</div>
-		<div class="form-control w-full">
-			<%= form.label :procedural_history, class: "label" %>
-			<%= form.text_area :procedural_history, class: "textarea textarea-bordered w-full min-h-[80px]" %>
-		</div>
+    <div>
+      <%= form.label :procedural_history, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= form.text_area :procedural_history, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border min-h-[80px]" %>
+    </div>
 
-		<!-- Facts -->
-		<div class="form-control w-full">
-			<%= form.label :facts, class: "label" %>
-			<%= form.text_area :facts, class: "textarea textarea-bordered w-full min-h-[80px]" %>
-		</div>
+    <div>
+      <%= form.label :facts, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= form.text_area :facts, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border min-h-[80px]" %>
+    </div>
 
-		<!-- Issue -->
-		<div class="form-control w-full">
-			<%= form.label :legal_issue, class: "label" %>
-			<%= form.text_area :legal_issue, class: "textarea textarea-bordered w-full min-h-[80px]" %>
-		</div>
+    <div>
+      <%= form.label :legal_issue, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= form.text_area :legal_issue, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border min-h-[80px]" %>
+    </div>
 
-		<!-- Holding -->
-		<div class="form-control w-full">
-			<%= form.label :holding, class: "label" %>
-			<%= form.text_area :holding, class: "textarea textarea-bordered w-full min-h-[80px]" %>
-		</div>
+    <div>
+      <%= form.label :holding, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= form.text_area :holding, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border min-h-[80px]" %>
+    </div>
 
-		<!-- Rule of Law -->
-		<div class="form-control w-full">
-			<%= form.label :rule_of_law, class: "label" %>
-			<%= form.text_area :rule_of_law, class: "textarea textarea-bordered w-full min-h-[80px]" %>
-		</div>
+    <div>
+      <%= form.label :rule_of_law, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= form.text_area :rule_of_law, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border min-h-[80px]" %>
+    </div>
 
-		<!-- Reasoning (Application) -->
-		<div class="form-control w-full">
-			<%= form.label :reasoning, class: "label" %>
-			<%= form.text_area :reasoning, class: "textarea textarea-bordered w-full min-h-[80px]" %>
-		</div>
+    <div>
+      <%= form.label :reasoning, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= form.text_area :reasoning, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border min-h-[80px]" %>
+    </div>
 
-		<!-- Conclusion -->
-		<div class="form-control w-full">
-			<%= form.label :conclusion, class: "label" %>
-			<%= form.text_area :conclusion, class: "textarea textarea-bordered w-full min-h-[80px]" %>
-		</div>
+    <div>
+      <%= form.label :conclusion, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= form.text_area :conclusion, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border min-h-[80px]" %>
+    </div>
 
-		<!-- Concurring / Dissenting Opinions -->
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-			<div class="form-control w-full">
-				<%= form.label :concurring_opinions, class: "label" %>
-				<%= form.text_area :concurring_opinions, class: "textarea textarea-bordered w-full min-h-[60px]" %>
-			</div>
-			<div class="form-control w-full">
-				<%= form.label :dissenting_opinions, class: "label" %>
-				<%= form.text_area :dissenting_opinions, class: "textarea textarea-bordered w-full min-h-[60px]" %>
-			</div>
-		</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <%= form.label :concurring_opinions, class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= form.text_area :concurring_opinions, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border min-h-[60px]" %>
+      </div>
+      <div>
+        <%= form.label :dissenting_opinions, class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= form.text_area :dissenting_opinions, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 border min-h-[60px]" %>
+      </div>
+    </div>
 
-		<!-- Document Upload -->
-		<div class="form-control w-full">
-			<%= form.label :document, "Attach Document (PDF, DOCX, TXT)", class: "label" %>
-			<%= form.file_field :document, class: "file-input file-input-bordered w-full" %>
-		</div>
+    <div>
+      <%= form.label :document, "Attach Document (PDF, DOCX, TXT)", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= form.file_field :document, class: "block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-purple-50 file:text-primary hover:file:bg-purple-100" %>
+    </div>
 
-		<div class="flex gap-4 justify-end mt-6">
-			<%= link_to "Cancel", cases_path, class: "btn btn-ghost" %>
-			<%= form.submit "Save Case", class: "btn btn-primary" %>
-		</div>
-	<% end %>
+    <div class="flex gap-3 justify-end pt-4 border-t border-gray-100">
+      <%= link_to "Cancel", cases_path, class: "px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition" %>
+      <%= form.submit "Save Case", class: "bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-purple-800 transition" %>
+    </div>
+    <% end %>
+  </div>
 </div>

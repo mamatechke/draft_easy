@@ -1,29 +1,28 @@
+<div class="py-8">
+  <h1 class="text-2xl font-semibold text-gray-900 mb-4">Welcome to your Draft Easy Dashboard</h1>
+  <p class="text-gray-600 mb-8">This is your starting point for managing cases, uploading documents, and generating drafts.</p>
 
-<div class="p-8">
-  <h1 class="text-3xl font-bold mb-4">Welcome to your Draft Easy Dashboard</h1>
-  <p class="mb-2">This is your starting point for managing cases, uploading documents, and generating drafts.</p>
-
-  <div class="mt-8">
-    <div class="flex justify-between items-center mb-2">
-      <h2 class="text-xl font-semibold">Recent Cases</h2>
-      <%= link_to "All Cases", cases_path, class: "btn btn-outline btn-sm" %>
+  <div>
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-medium text-gray-900">Recent Cases</h2>
+      <%= link_to "All Cases", cases_path, class: "border border-gray-300 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium hover:bg-gray-50 transition" %>
     </div>
     <% if @recent_cases.any? %>
-      <ul class="divide-y divide-base-200 bg-base-100 rounded-lg shadow">
+      <ul class="divide-y divide-gray-200 bg-white rounded-lg border border-gray-200 shadow-sm">
         <% @recent_cases.each do |c| %>
           <li class="p-4 flex flex-col md:flex-row md:items-center md:justify-between">
             <div>
-              <div class="font-bold"><%= c.title %></div>
-              <div class="text-base-content/70 text-sm"><%= c.description.truncate(60) %></div>
+              <div class="font-medium text-gray-900"><%= c.title %></div>
+              <div class="text-sm text-gray-500"><%= c.description.truncate(60) %></div>
             </div>
-            <div class="mt-2 md:mt-0 flex gap-2">
-              <%= link_to "View", case_path(c), class: "btn btn-xs btn-primary" %>
+            <div class="mt-2 md:mt-0">
+              <%= link_to "View", case_path(c), class: "text-primary hover:text-purple-800 text-sm font-medium" %>
             </div>
           </li>
         <% end %>
       </ul>
     <% else %>
-      <div class="alert alert-info mt-2">No cases yet. <%= link_to "Create your first case", new_case_path, class: "link link-primary" %></div>
+      <div class="bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 text-blue-800 text-sm">No cases yet. <%= link_to "Create your first case", new_case_path, class: "text-primary hover:text-purple-800 font-medium" %></div>
     <% end %>
   </div>
 </div>

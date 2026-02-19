@@ -1,188 +1,163 @@
-<%= render "shared/navbar" %>
+<main class="bg-white">
 
-<main class="bg-base-100">
+  <section class="min-h-[80vh] flex items-center justify-center px-4 py-20">
+    <div class="max-w-4xl mx-auto text-center">
+      <%= image_tag asset_path("drafteasylogo.png"), alt: "DraftEasy Logo", class: "h-20 mx-auto mb-6" %>
+      
+      <span class="inline-block bg-purple-100 text-primary text-sm font-medium px-4 py-1 rounded-full mb-6">AI-Powered Legal Drafting</span>
 
-  <!-- HERO -->
-  <section class="hero min-h-screen bg-gradient-to-br from-base-100 to-base-200 px-4">
-    <div class="hero-content text-center max-w-5xl flex flex-col gap-8">
-
-      <%= image_tag "drafteasylogo.png",
-        alt: "DraftEase Logo",
-        class: "h-24 sm:h-28 md:h-32 mx-auto mb-4 rounded object-cover" %>
-
-      <div class="badge badge-primary badge-lg mb-4">AI-Powered Legal Drafting</div>
-
-      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary leading-tight">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-6">
         Draft Awards & Judgments in Minutes
       </h1>
 
-      <p class="text-lg sm:text-xl md:text-2xl text-base-content/80 max-w-3xl mx-auto font-medium">
+      <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
         Transform complex legal cases into professional drafts with AI assistance.
         Save hours on research, writing, and formatting while maintaining accuracy.
       </p>
 
-      <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-        <%= link_to "Start Free Trial",
-          sign_up_path,
-          class: "btn btn-primary btn-lg w-full sm:w-auto px-8 py-4 text-lg" %>
-
-        <%= link_to "Watch Demo",
-          "#demo",
-          class: "btn btn-outline btn-secondary btn-lg w-full sm:w-auto px-8 py-4 text-lg" %>
+      <div class="flex flex-col sm:flex-row justify-center gap-3">
+        <%= link_to "Start Free Trial", sign_up_path, class: "bg-primary text-white px-6 py-3 rounded-md text-base font-medium hover:bg-purple-800 transition" %>
+        <%= link_to "Watch Demo", "#demo", class: "border border-gray-300 text-gray-700 px-6 py-3 rounded-md text-base font-medium hover:bg-gray-50 transition" %>
       </div>
 
-      <div class="mt-12 text-sm text-base-content/60">
+      <p class="mt-8 text-sm text-gray-500">
         Trusted by judges, lawyers, and legal professionals across Kenya
-      </div>
-
+      </p>
     </div>
   </section>
 
-  <!-- VALUE DELIVERY -->
-  <section class="py-20 bg-base-100 px-4">
-    <div class="max-w-3xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
-        What DraftEase Delivers
+  <section class="py-20 px-4 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-2xl sm:text-3xl font-semibold text-gray-900 text-center mb-12">
+        What Draft Easy Delivers
       </h2>
 
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
         <% [
-          ["🔒", "Secure Document Uploads", "Encrypted storage with immutable originals and full audit trails."],
-          ["🤖", "AI Summaries", "Structured, one-click summaries of facts, claims, and arguments."],
-          ["📚", "Precedent Search", "Relevant case law from Kenya Law Reports and trusted public sources."],
-          ["📝", "Draft Generation & Editing", "Professional draft awards tailored to your style, exportable to Word or PDF."],
-          ["📁", "Case Management", "Create, track, and complete cases with deadlines in one place."]
-        ].each do |icon, title, description| %>
-
-          <div class="card bg-base-200 shadow-md hover:shadow-lg transition p-6 text-center">
-            <div class="text-4xl mb-3"><%= icon %></div>
-            <h3 class="font-semibold text-lg mb-2"><%= title %></h3>
-            <p class="text-base-content/70"><%= description %></p>
+          ["Secure Document Uploads", "Encrypted storage with immutable originals and full audit trails.", '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>'],
+          ["AI Summaries", "Structured, one-click summaries of facts, claims, and arguments.", '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>'],
+          ["Precedent Search", "Relevant case law from Kenya Law Reports and trusted public sources.", '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>'],
+          ["Draft Generation & Editing", "Professional draft awards tailored to your style, exportable to Word or PDF.", '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>'],
+          ["Case Management", "Create, track, and complete cases with deadlines in one place.", '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>']
+        ].each do |title, description, icon| %>
+          <div class="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition text-center h-full">
+            <div class="h-10 w-10 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+              <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><%= icon.html_safe %></svg>
+            </div>
+            <h3 class="font-medium text-gray-900 mb-2 text-sm"><%= title %></h3>
+            <p class="text-xs text-gray-500"><%= description %></p>
           </div>
-
         <% end %>
-
       </div>
     </div>
   </section>
 
-  <!-- SECURITY -->
-  <section class="py-20 bg-base-200 px-4">
+  <section class="py-20 px-4">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+      <h2 class="text-2xl sm:text-3xl font-semibold text-gray-900 text-center mb-12">
         Security & Confidentiality
       </h2>
 
-      <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 text-center">
-
-        <div class="card bg-base-100 shadow p-6">
-          <div class="text-4xl mb-2">🔒</div>
-          <h3 class="font-semibold mb-2">End-to-End Encryption</h3>
-          <p class="text-base-content/80">
-            Data encrypted at rest and in transit.
-          </p>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+          <div class="h-10 w-10 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+          </div>
+          <h3 class="font-medium text-gray-900 mb-2">End-to-End Encryption</h3>
+          <p class="text-sm text-gray-500">Data encrypted at rest and in transit.</p>
         </div>
 
-        <div class="card bg-base-100 shadow p-6">
-          <div class="text-4xl mb-2">🗂️</div>
-          <h3 class="font-semibold mb-2">Private Workspaces</h3>
-          <p class="text-base-content/80">
-            Each drafter operates in a fully isolated environment.
-          </p>
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+          <div class="h-10 w-10 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-medium text-gray-900 mb-2">Private Workspaces</h3>
+          <p class="text-sm text-gray-500">Each drafter operates in a fully isolated environment.</p>
         </div>
 
-        <div class="card bg-base-100 shadow p-6">
-          <div class="text-4xl mb-2">📝</div>
-          <h3 class="font-semibold mb-2">Audit Trails</h3>
-          <p class="text-base-content/80">
-            Full traceability for compliance and peace of mind.
-          </p>
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+          <div class="h-10 w-10 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-medium text-gray-900 mb-2">Audit Trails</h3>
+          <p class="text-sm text-gray-500">Full traceability for compliance and peace of mind.</p>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- WHO IT'S FOR -->
-  <section class="py-20 bg-base-100 px-4">
+  <section class="py-20 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-10">
-        Who DraftEase Is For
+      <h2 class="text-2xl sm:text-3xl font-semibold text-gray-900 mb-8">
+        Who Draft Easy Is For
       </h2>
 
-      <div class="flex flex-wrap justify-center gap-4">
-        <span class="badge badge-lg badge-primary">Lawyers</span>
-        <span class="badge badge-lg badge-secondary">Judges</span>
-        <span class="badge badge-lg badge-accent">Arbitrators</span>
-        <span class="badge badge-lg badge-neutral">Mediators</span>
+      <div class="flex flex-wrap justify-center gap-3">
+        <span class="bg-purple-100 text-primary px-4 py-2 rounded-md text-sm font-medium">Lawyers</span>
+        <span class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm font-medium">Judges</span>
+        <span class="bg-teal-100 text-teal-700 px-4 py-2 rounded-md text-sm font-medium">Arbitrators</span>
+        <span class="bg-gray-100 text-gray-600 px-4 py-2 rounded-md text-sm font-medium">Mediators</span>
       </div>
     </div>
   </section>
 
-  <!-- PRICING -->
-  <section id="pricing" class="py-20 bg-base-200 px-4">
+  <section id="pricing" class="py-20 px-4">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+      <h2 class="text-2xl sm:text-3xl font-semibold text-gray-900 text-center mb-12">
         Simple, Transparent Pricing
       </h2>
 
       <div class="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
         <% @plans.each do |plan| %>
-          <div class="card bg-base-100 shadow-lg <%= plan.name == 'Pro' ? 'border-primary border-2' : '' %>">
-            <div class="card-body">
-              <h3 class="card-title text-2xl font-bold"><%= plan.name %></h3>
-              <div class="text-4xl font-bold text-primary mb-2">
-                USD <%= plan.amount / 100 %>
-                <% if plan.amount > 0 %>
-                  <span class="text-lg text-base-content/70">/<%= plan.interval %></span>
-                <% end %>
-              </div>
-              <p class="text-base-content/70 mb-4"><%= plan.features %></p>
-              <div class="flex gap-2 mb-2">
-                <%= link_to 'See features', features_path(anchor: plan.name.parameterize), class: 'link' %>
-              </div>
-              <% if plan.name == 'Free' %>
-                <%= link_to "Get Started",
-                  sign_up_path,
-                  class: "btn btn-outline btn-primary w-full" %>
-              <% else %>
-                <%= link_to "Start Free Trial",
-                  sign_up_path,
-                  class: "btn btn-primary w-full" %>
+          <div class="bg-white rounded-lg border <%= plan.name == 'Pro' ? 'border-primary ring-2 ring-primary ring-opacity-50' : 'border-gray-200' %> shadow-sm p-6">
+            <h3 class="text-xl font-semibold text-gray-900"><%= plan.name %></h3>
+            <div class="mt-2 mb-4">
+              <span class="text-3xl font-bold text-primary">USD <%= plan.amount / 100 %></span>
+              <% if plan.amount > 0 %>
+                <span class="text-gray-500">/<%= plan.interval %></span>
               <% end %>
             </div>
+            <p class="text-sm text-gray-500 mb-4"><%= plan.features %></p>
+            <div class="mb-4">
+              <%= link_to 'See features', features_path(anchor: plan.name.parameterize), class: 'text-primary hover:text-purple-800 text-sm' %>
+            </div>
+            <% if plan.name == 'Free' %>
+              <%= link_to "Get Started", sign_up_path, class: "block w-full border border-primary text-primary text-center px-4 py-2 rounded-md font-medium hover:bg-purple-50 transition" %>
+            <% else %>
+              <%= link_to "Start Free Trial", sign_up_path, class: "block w-full bg-primary text-white text-center px-4 py-2 rounded-md font-medium hover:bg-purple-800 transition" %>
+            <% end %>
           </div>
         <% end %>
       </div>
 
-      <p class="text-center text-base-content/70 mt-8">
+      <p class="text-center text-gray-500 text-sm mt-8">
         All plans include secure document storage, AI assistance, and 24/7 support.
       </p>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="border-t bg-base-100 px-4 py-10">
+  <footer class="border-t bg-white px-4 py-10">
     <div class="max-w-6xl mx-auto grid gap-6 md:grid-cols-3 items-center">
-
       <div class="flex items-center gap-3 justify-center md:justify-start">
-        <%= image_tag "drafteasylogo.png",
-          alt: "DraftEase Logo",
-          class: "h-8 rounded-full object-cover" %>
-        <span class="font-semibold text-lg">DraftEase</span>
+        <%= image_tag "drafteasylogo.png", alt: "Draft Easy Logo", class: "h-10" %>
+        <span class="font-medium text-gray-900">Draft Easy</span>
       </div>
 
       <div class="flex justify-center gap-6">
-        <%= link_to "Privacy", "#", class: "link link-hover" %>
-        <%= link_to "Terms", "#", class: "link link-hover" %>
-        <%= link_to "Contact", "#", class: "link link-hover" %>
+        <%= link_to "Privacy", "#", class: "text-gray-500 hover:text-gray-900 text-sm" %>
+        <%= link_to "Terms", "#", class: "text-gray-500 hover:text-gray-900 text-sm" %>
+        <%= link_to "Contact", "#", class: "text-gray-500 hover:text-gray-900 text-sm" %>
       </div>
 
-      <div class="text-sm text-base-content/70 text-center md:text-right">
-        © <%= Time.current.year %> DraftEase. All rights reserved.
+      <div class="text-sm text-gray-500 text-center md:text-right">
+        &copy; <%= Time.current.year %> Draft Easy. All rights reserved.
       </div>
-
     </div>
   </footer>
 

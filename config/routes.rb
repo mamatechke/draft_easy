@@ -29,9 +29,6 @@ Rails.application.routes.draw do
   get "sign_up", to: "registrations#new"
   post "sign_up", to: "registrations#create"
 
-  # OAuth
-  get '/auth/:provider/callback', to: 'sessions#omniauth'
-
   resources :sessions, only: [:destroy]
   resource :password, only: [:edit, :update]
 

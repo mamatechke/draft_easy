@@ -1,29 +1,36 @@
-<h1 class="text-center mb-6"><%= t(".title") %></h1>
-
-<%= form_with(url: sign_up_path, class: "flex flex-col gap-4 w-full max-w-sm") do |form| %>
-  <% if @user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% @user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+  <div class="max-w-sm w-full">
+    <div class="text-center mb-8">
+      <%= image_tag asset_path("drafteasylogo.png"), alt: "DraftEasy Logo", class: "h-16 mx-auto mb-4" %>
+      <h1 class="text-2xl font-bold text-gray-900">Create Account</h1>
+      <p class="text-gray-500 mt-1">Start your free trial today</p>
     </div>
-  <% end %>
-  <%= form.ui_email_field :email, label: false, placeholder: t("email"), required: true, autocomplete: "email", autofocus: true %>
-  <%= form.ui_password_field :password, label: false, placeholder: t("password"), hint: "6 characters minimum.", required: true, autocomplete: "current-password" %>
-  <%= form.ui_submit t("sign_up"), id: :sign_up, class: "btn btn-primary mt-4" %>
-<% end %>
 
-<div class="mt-4 text-center">
-  <%= link_to '/auth/google_oauth2', class: 'btn btn-outline btn-block' do %>
-    Sign up with Google
-  <% end %>
-</div>
+    <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
+      <%= form_with(url: sign_up_path, class: "flex flex-col gap-4") do |form| %>
+        <% if @user.errors.any? %>
+          <div class="bg-red-50 border border-red-200 rounded-md px-4 py-3 text-red-800 text-sm">
+            <h2 class="font-medium"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+            <ul class="mt-1 list-disc list-inside">
+              <% @user.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div>
+          <%= form.ui_email_field :email, label: false, placeholder: t("email"), required: true, autocomplete: "email", autofocus: true %>
+        </div>
+        <div>
+          <%= form.ui_password_field :password, label: false, placeholder: t("password"), hint: "6 characters minimum.", required: true, autocomplete: "current-password" %>
+        </div>
+        <%= form.ui_submit t("sign_up"), id: :sign_up, class: "w-full bg-primary text-white py-2.5 px-4 rounded-md hover:bg-purple-800 transition font-medium mt-2" %>
+      <% end %>
+    </div>
 
-<div class="mt-4">
-  <%= t(".already_have_an_account") %>
-  <%= link_to t("login"), sign_in_path, class: "btn btn-secondary btn-sm ml-2" %>
+    <div class="mt-6 text-center text-sm text-gray-600">
+      <%= t(".already_have_an_account") %>
+      <%= link_to t("login"), sign_in_path, class: "text-primary hover:text-purple-800 font-medium ml-1" %>
+    </div>
+  </div>
 </div>

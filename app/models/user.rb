@@ -51,16 +51,6 @@ class User < ApplicationRecord
     self.plan = Plan.find_by(name: "Free") # Assign free plan initially
   end
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.first_name = auth.info.first_name || auth.info.name.split.first
-      user.last_name = auth.info.last_name || auth.info.name.split.last
-      user.password_digest = SecureRandom.hex(32)
-      user.verified = true
-    end
-  end
-
   def name_for_admin
     [first_name, last_name, "(#{email})"].join(" ")
   end

@@ -1,21 +1,29 @@
-<h1 class="text-center mb-6"><%= t(".title") %></h1>
+<div class="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+  <div class="max-w-sm w-full">
+    <div class="text-center mb-8">
+      <%= image_tag asset_path("drafteasylogo.png"), alt: "DraftEasy Logo", class: "h-16 mx-auto mb-4" %>
+      <h1 class="text-2xl font-bold text-gray-900">Welcome Back</h1>
+      <p class="text-gray-500 mt-1">Sign in to your account</p>
+    </div>
 
-<%= form_with(url: sign_in_path, class: "flex flex-col max-w-sm gap-6 w-full") do |form| %>
-  <%= form.ui_email_field :email, tabindex: 1, label: false, placeholder: t("email"), required: true, autofocus: true %>
-  <div class="flex flex-col gap-1">
-    <%= link_to t("forgot_password"), new_identity_password_reset_path, tabindex: 3, class: "link link-primary ml-auto" %>
-    <%= form.ui_password_field :password, tabindex: 2, label: false, placeholder: t("password"), required: true, autocomplete: "current-password" %>
+    <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
+      <%= form_with(url: sign_in_path, class: "flex flex-col gap-4") do |form| %>
+        <div>
+          <%= form.ui_email_field :email, tabindex: 1, label: false, placeholder: t("email"), required: true, autofocus: true %>
+        </div>
+        <div>
+          <div class="flex justify-end mb-1">
+            <%= link_to t("forgot_password"), new_identity_password_reset_path, tabindex: 3, class: "text-sm text-primary hover:text-purple-800" %>
+          </div>
+          <%= form.ui_password_field :password, tabindex: 2, label: false, placeholder: t("password"), required: true, autocomplete: "current-password" %>
+        </div>
+        <%= form.ui_submit t("sign_in"), tabindex: 4, class: "w-full bg-primary text-white py-2.5 px-4 rounded-md hover:bg-purple-800 transition font-medium mt-2", id: :sign_in %>
+      <% end %>
+    </div>
+
+    <div class="mt-6 text-center text-sm text-gray-600">
+      <%= t(".no_account_yet") %>
+      <%= link_to t("sign_up"), sign_up_path, class: "text-primary hover:text-purple-800 font-medium ml-1" %>
+    </div>
   </div>
-  <%= form.ui_submit t("sign_in"), tabindex: 4, class: "btn btn-primary mt-6", id: :sign_in %>
-<% end %>
-
-<div class="mt-4 text-center">
-  <%= link_to '/auth/google_oauth2', class: 'btn btn-outline btn-block' do %>
-    Sign in with Google
-  <% end %>
-</div>
-
-<div class="mt-4">
-  <%= t(".no_account_yet") %>
-  <%= link_to t("sign_up"), sign_up_path, class: "btn btn-secondary btn-sm ml-2" %>
 </div>

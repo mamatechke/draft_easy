@@ -1,65 +1,56 @@
-<nav class="navbar bg-base-100 shadow mb-4">
-  <div class="container mx-auto flex items-center justify-between py-2 px-4">
-    <div class="flex items-center space-x-2">
-      <%= link_to(Current.user ? dashboard_path : root_path, class: "btn btn-ghost no-animation flex items-center") do %>
-        <%= image_tag asset_path("drafteasylogo.png"), alt: "Draft Easy Logo", class: "h-14 inline mr-2 align-middle rounded object-cover" %>
-      <% end %>
-    </div>
+<nav class="bg-white border-b border-gray-200 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-14">
+      <div class="flex items-center">
+        <%= link_to(Current.user ? dashboard_path : root_path, class: "flex items-center") do %>
+          <%= image_tag asset_path("drafteasylogo.png"), alt: "Draft Easy Logo", class: "h-8 w-auto" %>
+        <% end %>
+      </div>
 
-    <div class="flex items-center">
-      <%# Determine sign-in route: prefer Devise if present, else fallback to app's sign_in_path %>
-      <% route_helpers = Rails.application.routes.url_helpers %>
-      <% sign_in_route = route_helpers.respond_to?(:new_user_session_path) ? route_helpers.new_user_session_path : sign_in_path %>
-
-      <% if Current.user && Current.session %>
-        <div class="hidden md:flex items-center space-x-3">
-          <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="btn btn-ghost btn-sm">Menu</div>
-            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-              <li><%= link_to "Dashboard", dashboard_path %></li>
-              <li><%= link_to "Cases", cases_path %></li>
-              <li><%= link_to "Deadlines", deadlines_path %></li>
-              <li><%= link_to "Subscription", subscriptions_path %></li>
-            </ul>
+      <div class="flex items-center">
+        <% if Current.user && Current.session %>
+          <div class="hidden md:flex items-center space-x-4">
+            <%= link_to "Cases", cases_path, class: "text-gray-600 hover:text-gray-900 text-sm font-medium" %>
+            <%= link_to "Deadlines", deadlines_path, class: "text-gray-600 hover:text-gray-900 text-sm font-medium" %>
+            <%= link_to "Add New Case", new_case_path, class: "bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-purple-800 transition" %>
+            
+            <details class="relative" data-controller="dropdown">
+              <summary class="cursor-pointer list-none focus:outline-none">
+                <div class="h-8 w-8 bg-purple-100 rounded-full flex items-center justify-center">
+                  <span class="text-purple-800 font-medium text-sm"><%= Current.user.email[0].upcase %></span>
+                </div>
+              </summary>
+              <div class="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg border border-gray-200 py-1 z-50">
+                <%= link_to "Subscription", subscriptions_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                <div class="border-t border-gray-100 my-1"></div>
+                <%= button_to "Sign out", session_path(Current.session.id), method: :delete, data: { turbo_method: :delete }, class: "block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+              </div>
+            </details>
           </div>
-          <%= link_to "Add New Case Brief", new_case_path, class: "btn btn-primary btn-sm" %>
-          <%= link_to "Sign out", session_path(Current.session.id), method: :delete, data: { turbo_method: :delete }, class: "btn btn-secondary btn-sm ml-2" %>
-          <div class="avatar placeholder ml-2">
-            <div class="bg-neutral text-neutral-content rounded-full w-8 border-2 border-primary">
-              <span><%= Current.user.email[0].upcase %></span>
+
+          <div class="md:hidden">
+            <div class="relative" data-controller="dropdown">
+              <button type="button" class="text-gray-600 hover:text-gray-900 p-2" data-action="dropdown#toggle">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+              </button>
+              <div class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 py-1 z-50" data-dropdown-target="menu">
+                <%= link_to "Cases", cases_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                <%= link_to "Deadlines", deadlines_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                <%= link_to "Add Case", new_case_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                <div class="border-t border-gray-100 my-1"></div>
+                <%= link_to "Subscription", subscriptions_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                <%= button_to "Sign out", session_path(Current.session.id), method: :delete, data: { turbo_method: :delete }, class: "block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+              </div>
             </div>
           </div>
-        </div>
-
-        <%# Mobile dropdown for signed-in users %>
-        <div class="md:hidden">
-          <div class="dropdown dropdown-end">
-            <label tabindex="0" class="btn btn-ghost btn-sm">☰</label>
-            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-48 p-2 shadow">
-              <li><%= link_to "Dashboard", dashboard_path %></li>
-              <li><%= link_to "Cases", cases_path %></li>
-              <li><%= link_to "Deadlines", deadlines_path %></li>
-              <li><%= link_to "Subscription", subscriptions_path %></li>
-              <li><%= link_to "Add Case", new_case_path %></li>
-              <li><%= link_to "Sign out", session_path(Current.session.id), method: :delete, data: { turbo_method: :delete } %></li>
-            </ul>
+        <% else %>
+          <div class="hidden md:flex items-center space-x-4">
+            <%= link_to "Sign up", sign_up_path, class: "bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-purple-800 transition" %>
           </div>
-        </div>
-      <% else %>
-        <div class="hidden md:flex items-center space-x-3">
-          <%= link_to "Sign up", sign_up_path, class: "btn btn-primary btn-sm ml-2" %>
-        </div>
-
-        <%# Mobile dropdown for guests %>
-        <div class="md:hidden">
-          <div class="dropdown dropdown-end">
-            <label tabindex="0" class="btn btn-ghost btn-sm">☰</label>
-            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow">
-              <li><%= link_to "Sign up", sign_up_path %></li>
-            </ul>
-          </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </nav>

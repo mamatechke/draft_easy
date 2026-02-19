@@ -1,0 +1,13 @@
+<nav class="mb-6 pt-4">
+  <div class="bg-gray-50 rounded-lg border border-gray-200 px-4 py-3">
+    <ol class="flex items-center gap-2 text-sm">
+      <li><%= link_to 'Dashboard', dashboard_path, class: 'text-primary hover:text-purple-800 font-medium' %></li>
+      <li class="text-gray-400">/</li>
+      <% if defined?(parent) && parent.present? %>
+        <li><%= link_to parent, parent_path, class: 'text-primary hover:text-purple-800 font-medium' %></li>
+        <li class="text-gray-400">/</li>
+      <% end %>
+      <li class="text-gray-700 font-semibold"><%= current %></li>
+    </ol>
+  </div>
+</nav>
