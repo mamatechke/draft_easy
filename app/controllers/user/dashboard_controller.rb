@@ -1,6 +1,4 @@
-module User
-  class DashboardController < ApplicationController
-    def show
-    end
+class User::DashboardController < ApplicationController
+  def show
   end
 end
