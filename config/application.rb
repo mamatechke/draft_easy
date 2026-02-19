@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -10,7 +10,7 @@ module DraftEast
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2
-    config.application_name = "Draft East"
+    config.application_name = 'Draft East'
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -25,15 +25,10 @@ module DraftEast
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    # Use Solid Queue as the Active Job backend
-    config.active_job.queue_adapter = :solid_queue
-    config.solid_queue.connects_to = {database: {writing: :queue, reading: :queue}}
-
-    # Use Solid Cache Store as the cache store
-    config.cache_store = :solid_cache_store
+    config.active_job.queue_adapter = :async
 
     # Use a separate database for error monitoring
-    config.solid_errors.connects_to = {database: {writing: :errors, reading: :errors}}
+    # config.solid_errors.connects_to = {database: {writing: :errors, reading: :errors}}
     # config.solid_errors.send_emails = true
     # config.solid_errors.email_from = "errors@hello.com"
     # config.solid_errors.email_to = "me@hello.com"
