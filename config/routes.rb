@@ -32,17 +32,20 @@ Rails.application.routes.draw do
   resources :sessions, only: [:destroy]
   resource :password, only: [:edit, :update]
 
+  # Admin-specific login separate from regular user sign-in
+  get "admin/login", to: "admin/sessions#new", as: :admin_login
+  post "admin/login", to: "admin/sessions#create"
+  delete "admin/logout", to: "admin/sessions#destroy", as: :admin_logout
   namespace :identity do
     resource :email, only: [:edit, :update]
     resource :email_verification, only: [:show, :create]
     resource :password_reset, only: [:new, :edit, :create, :update]
   end
 
-  authenticate :admin do
-    mount Avo::Engine, at: Avo.configuration.root_path
-    mount Blazer::Engine, at: "blazer"
-    mount SolidErrors::Engine, at: "/solid_errors"
-  end
+  # Mount admin tooling at /admin; Avo will handle authorization via `Current.user`
+  mount Avo::Engine, at: Avo.configuration.root_path
+  mount Blazer::Engine, at: "blazer"
+  mount SolidErrors::Engine, at: "/solid_errors"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

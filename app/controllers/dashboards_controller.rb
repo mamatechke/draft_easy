@@ -2,6 +2,11 @@ class DashboardsController < ApplicationController
   before_action :require_login
 
   def show
+    # Redirect admins to the Avo admin UI
+    if Current.user&.admin?
+      redirect_to Avo.configuration.root_path and return
+    end
+
     @stats = dashboard_stats
     @recent_cases = Current.user.cases.order(updated_at: :desc).limit(5)
   end

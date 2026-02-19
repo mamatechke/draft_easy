@@ -1,0 +1,1 @@
+/home/tich/.local/share/opencode/plans/draftease_mvp_plan.md
