@@ -46,7 +46,11 @@ when 'development'
 end
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-port ENV.fetch('PORT', 3000).to_i
+port_number = ENV.fetch('PORT') { 3000 }.to_i
+port port_number
+
+# Explicitly bind to all interfaces so the container accepts external traffic.
+bind "tcp://0.0.0.0:#{port_number}"
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
