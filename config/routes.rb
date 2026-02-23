@@ -36,17 +36,14 @@ Rails.application.routes.draw do
   get 'admin/login', to: 'admin/sessions#new', as: :admin_login
   post 'admin/login', to: 'admin/sessions#create'
   delete 'admin/logout', to: 'admin/sessions#destroy', as: :admin_logout
-  namespace :admin do
-    get 'analytics', to: 'analytics#index'
-  end
   namespace :identity do
     resource :email, only: %i[edit update]
     resource :email_verification, only: %i[show create]
     resource :password_reset, only: %i[new edit create update]
   end
 
-  # Mount Blazer for analytics
-  mount Blazer::Engine, at: 'blazer'
+  # Mount Avo admin panel
+  mount Avo::Engine, at: Avo.configuration.root_path
   mount SolidErrors::Engine, at: '/solid_errors'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

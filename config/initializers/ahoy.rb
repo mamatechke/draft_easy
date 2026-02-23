@@ -1,5 +1,5 @@
 # set to true for JavaScript tracking
-Ahoy.api = true
+Ahoy.api = false
 
 # set to true for geocoding (and add the geocoder gem to your Gemfile)
 # we recommend configuring local geocoding as well

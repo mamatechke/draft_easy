@@ -21,64 +21,6 @@ pro_plan = Plan.create!(
 
 puts "Seeded #{Plan.count} plans"
 
-puts 'Seeding Blazer analytics queries'
-Blazer::Query.destroy_all
-
-queries = [
-  {
-    name: 'User Signups (Last 30 Days)',
-    description: 'Count of new users in the last 30 days',
-    statement: "SELECT DATE(created_at) as date, COUNT(*) as new_users FROM users WHERE created_at >= NOW() - INTERVAL '30 days' GROUP BY DATE(created_at) ORDER BY date",
-    data_source: 'main'
-  },
-  {
-    name: 'Total Cases by User',
-    description: 'Number of cases created per user',
-    statement: 'SELECT users.email, COUNT(cases.id) as case_count FROM users LEFT JOIN cases ON users.id = cases.user_id GROUP BY users.email ORDER BY case_count DESC',
-    data_source: 'main'
-  },
-  {
-    name: 'Cases Created (Last 30 Days)',
-    description: 'Daily count of new cases',
-    statement: "SELECT DATE(created_at) as date, COUNT(*) as new_cases FROM cases WHERE created_at >= NOW() - INTERVAL '30 days' GROUP BY DATE(created_at) ORDER BY date",
-    data_source: 'main'
-  },
-  {
-    name: 'Page Views (Last 7 Days)',
-    description: 'Total page views in the last 7 days',
-    statement: "SELECT DATE(time) as date, COUNT(*) as page_views FROM ahoy_events WHERE name LIKE '%#%' AND time >= NOW() - INTERVAL '7 days' GROUP BY DATE(time) ORDER BY date",
-    data_source: 'main'
-  },
-  {
-    name: 'Active Users (Last 7 Days)',
-    description: 'Unique users who visited in the last 7 days',
-    statement: "SELECT DATE(started_at) as date, COUNT(DISTINCT user_id) as active_users FROM ahoy_visits WHERE started_at >= NOW() - INTERVAL '7 days' AND user_id IS NOT NULL GROUP BY DATE(started_at) ORDER BY date",
-    data_source: 'main'
-  },
-  {
-    name: 'Revenue Overview',
-    description: 'Summary of subscription revenue',
-    statement: 'SELECT plan_id, COUNT(*) as subscriber_count, SUM(CASE WHEN trial_ends_at > NOW() THEN 0 ELSE amount/100.0 END) as estimated_monthly_revenue FROM users LEFT JOIN plans ON users.plan_id = plans.id WHERE subscribed = true GROUP BY plan_id',
-    data_source: 'main'
-  },
-  {
-    name: 'Popular Features',
-    description: 'Most used features based on ahoy events',
-    statement: "SELECT name, COUNT(*) as usage_count FROM ahoy_events WHERE time >= NOW() - INTERVAL '30 days' GROUP BY name ORDER BY usage_count DESC LIMIT 10",
-    data_source: 'main'
-  }
-]
-
-queries.each do |q|
-  Blazer::Query.find_or_create_by(name: q[:name]) do |query|
-    query.description = q[:description]
-    query.statement = q[:statement]
-    query.data_source = q[:data_source]
-  end
-end
-
-puts "Seeded #{Blazer::Query.count} analytics queries"
-
 if Rails.env.development?
   puts 'Deleting all users except lawyer1@drafting.com in development environment only'
   User.where.not(email: 'lawyer1@drafting.com').destroy_all
@@ -105,9 +47,9 @@ if Rails.env.development?
       court: 'Court of Appeal',
       jurisdiction: 'Kenya',
       decision_year: 2020,
-      procedural_history: 'The High Court dismissed the plaintiff’s claim for wrongful termination. The plaintiff appealed the decision to the Court of Appeal.',
+      procedural_history: "The High Court dismissed the plaintiff's claim for wrongful termination. The plaintiff appealed the decision to the Court of Appeal.",
       facts: 'The plaintiff was employed by the defendant bank for ten years before being summarily dismissed following allegations of gross misconduct. No disciplinary hearing was conducted prior to termination.',
-      legal_issue: 'Whether the defendant violated the principles of natural justice by terminating the plaintiff’s employment without a hearing.',
+      legal_issue: "Whether the defendant violated the principles of natural justice by terminating the plaintiff's employment without a hearing.",
       holding: 'Yes. The termination was unlawful.',
       rule_of_law: 'An employer must accord an employee a fair hearing before termination, in accordance with principles of natural justice and employment law.',
       reasoning: 'The court found that the failure to conduct a disciplinary hearing denied the plaintiff an opportunity to respond to the allegations. This omission rendered the termination procedurally unfair.',
@@ -122,7 +64,7 @@ if Rails.env.development?
       court: 'High Court',
       jurisdiction: 'Kenya',
       decision_year: 2021,
-      procedural_history: 'The accused was convicted in the Magistrate’s Court and appealed the conviction to the High Court.',
+      procedural_history: "The accused was convicted in the Magistrate's Court and appealed the conviction to the High Court.",
       facts: 'The accused was charged with robbery with violence. The prosecution relied primarily on eyewitness testimony obtained at night under poor lighting conditions.',
       legal_issue: 'Whether the conviction was safe given the reliance on uncorroborated eyewitness identification.',
       holding: 'No. The conviction was unsafe.',
@@ -141,7 +83,7 @@ if Rails.env.development?
       decision_year: 2023,
       procedural_history: 'The applicant sought judicial review orders following the cancellation of an environmental license by the county authority.',
       facts: 'The applicant held a valid license to operate a waste recycling plant. The county government revoked the license without prior notice or reasons.',
-      legal_issue: 'Whether the revocation of the license violated the applicant’s right to fair administrative action.',
+      legal_issue: "Whether the revocation of the license violated the applicant's right to fair administrative action.",
       holding: 'Yes. The revocation was unlawful.',
       rule_of_law: 'Administrative bodies must act lawfully, reasonably, and procedurally fairly when making decisions affecting rights.',
       reasoning: 'The court found that the failure to give notice or reasons breached statutory and constitutional requirements for fair administrative action.',
@@ -175,8 +117,8 @@ if Rails.env.development?
       decision_year: 2021,
       procedural_history: 'The petitioner filed a constitutional petition challenging the refusal to issue a national identity card.',
       facts: 'The petitioner was denied an identity card on grounds of insufficient documentation, despite being born and educated in Kenya.',
-      legal_issue: 'Whether the refusal violated the petitioner’s constitutional rights to equality and dignity.',
-      holding: 'Yes. The petitioner’s rights were violated.',
+      legal_issue: "Whether the refusal violated the petitioner's constitutional rights to equality and dignity.",
+      holding: "Yes. The petitioner's rights were violated.",
       rule_of_law: 'Administrative actions must not unjustifiably infringe constitutional rights, including equality and human dignity.',
       reasoning: 'The court found the decision arbitrary and unsupported by evidence, disproportionately affecting the petitioner.',
       conclusion: 'The respondent was ordered to issue the identity card and pay costs.',
