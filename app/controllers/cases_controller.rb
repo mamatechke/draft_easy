@@ -6,7 +6,7 @@ class CasesController < ApplicationController
   # POST /cases/:id/summarize
   def summarize
     if @case.extracted_text.present?
-      summary = OllamaSummarizer.summarize(@case.extracted_text)
+      summary = GroqClient.summarize(@case.extracted_text)
       @case.update(summary: summary)
       flash[:notice] = 'Summary generated successfully.'
     else
@@ -55,18 +55,12 @@ class CasesController < ApplicationController
     style = params[:draft_style] || 'formal'
     precedents_text = params[:selected_precedents].presence || 'No specific precedents selected.'
 
-    prompt = case style
-             when 'concise'
-               'Generate a concise legal draft based on the following summary and precedents.'
-             when 'formal'
-               'Generate a formal legal judgment draft based on the following summary and precedents.'
-             else
-               'Generate a standard legal draft based on the following summary and precedents.'
-             end
-
-    full_prompt = "#{prompt}\n\nSummary: #{@case.summary}\n\nPrecedents: #{precedents_text}\n\nCase Details: #{@case.facts}"
-
-    draft = OllamaSummarizer.summarize(full_prompt) # Reuse for draft gen
+    draft = GroqClient.generate_draft(
+      summary: @case.summary || '',
+      precedents: precedents_text,
+      facts: @case.facts || '',
+      style: style
+    )
     @case.update(draft_content: draft, draft_style: style)
     redirect_to @case, notice: 'Draft generated successfully.'
   rescue StandardError => e
