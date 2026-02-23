@@ -4,12 +4,7 @@
     <%= render "layouts/head" %>
   </head>
 
-  <body class="min-h-screen bg-gray-50">
-    <div class="absolute top-4 left-4">
-      <%= link_to root_path, class: "flex items-center gap-2" do %>
-        <%= image_tag asset_path("drafteasylogo.png"), alt: "DraftEasy Logo", class: "h-10" %>
-      <% end %>
-    </div>
+  <body class="min-h-screen bg-gray-50 flex items-center justify-center">
     <%= yield %>
     <%= render "shared/flashes" %>
   </body>
