@@ -1,5 +1,6 @@
 # SaaS landing page
 Rails.application.routes.draw do
+  mount_avo
   get 'subscriptions/index'
   get 'deadlines/index'
   get 'landing', to: 'home#landing', as: :landing

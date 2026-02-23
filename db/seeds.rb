@@ -21,6 +21,18 @@ pro_plan = Plan.create!(
 
 puts "Seeded #{Plan.count} plans"
 
+puts 'Seeding admin user'
+admin = User.find_or_initialize_by(email: 'admin@draftease.com')
+admin.first_name = 'Admin'
+admin.last_name = 'User'
+admin.password = 'admin123'
+admin.password_confirmation = 'admin123'
+admin.admin = true
+admin.verified = true
+admin.plan = pro_plan
+admin.save!
+puts "Seeded admin user: #{admin.email}"
+
 if Rails.env.development?
   puts 'Deleting all users except lawyer1@drafting.com in development environment only'
   User.where.not(email: 'lawyer1@drafting.com').destroy_all
