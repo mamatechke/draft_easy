@@ -45,8 +45,7 @@ Rails.application.routes.draw do
     resource :password_reset, only: %i[new edit create update]
   end
 
-  # Mount admin tooling at /admin; Avo will handle authorization via `Current.user`
-  mount Avo::Engine, at: Avo.configuration.root_path
+  # Mount Blazer for analytics
   mount Blazer::Engine, at: 'blazer'
   mount SolidErrors::Engine, at: '/solid_errors'
 
