@@ -16,5 +16,6 @@
       <%= yield %>
     <% end %>
     <%= turbo_stream_from Current.user if Current.user %>
+    <%= ahoy_tracking_tags %>
   </body>
 </html>
