@@ -18,12 +18,15 @@ Avo.configure do |config|
   end
 
   ## == Authentication ==
-  # config.current_user_method = :current_user
-  # config.authenticate_with do
-  # end
+  config.current_user_method = :current_avo_user
+
+  config.authenticate_with do
+    redirect_to root_path, alert: 'Access denied. Admin only.' unless Current.user&.admin?
+  end
 
   ## == Authorization ==
   # config.is_admin_method = :is_admin
+  config.is_admin_method = :admin?
   # config.is_developer_method = :is_developer
   # config.authorization_methods = {
   #   index: 'index?',
@@ -63,7 +66,6 @@ Avo.configure do |config|
 
   ## == Response messages dismiss time ==
   # config.alert_dismiss_time = 5000
-
 
   ## == Number of search results to display ==
   # config.search_results_count = 8
