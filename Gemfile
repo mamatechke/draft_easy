@@ -133,4 +133,8 @@ gem "pdf-reader", "~> 2.15"
 
 gem "prawn", "~> 2.4"
 
+# Web scraping for Kenya Law
+gem "httparty"
+gem "nokogiri"
+
 gem "stripe", "~> 10.0"

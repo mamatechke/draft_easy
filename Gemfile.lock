@@ -249,6 +249,10 @@ GEM
       actioncable (>= 7.0.0)
       listen (>= 3.0.0)
       railties (>= 7.0.0)
+    httparty (0.24.2)
+      csv
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     i18n-tasks (1.1.2)
@@ -336,6 +340,8 @@ GEM
     minitest (6.0.1)
       prism (~> 1.5)
     msgpack (1.8.0)
+    multi_xml (0.8.1)
+      bigdecimal (>= 3.1, < 5)
     net-imap (0.6.2)
       date
       net-protocol
@@ -643,6 +649,7 @@ DEPENDENCIES
   erb_lint
   heroicon (~> 1.0)
   hotwire-livereload
+  httparty
   i18n-tasks
   i18n_generators
   image_processing (~> 1.2)
@@ -653,6 +660,7 @@ DEPENDENCIES
   magic_test!
   markdown-rails (~> 2.1)
   minitest (~> 6.0)
+  nokogiri
   pdf-reader (~> 2.15)
   pg (>= 1.4)
   prawn (~> 2.4)
@@ -757,6 +765,7 @@ CHECKSUMS
   heroicon (1.0.0) sha256=e63a535a630d6fd3d99c0179d722753c8cd3478df1277eca7a4215c135b6e9cb
   highline (3.1.2) sha256=67cbd34d19f6ef11a7ee1d82ffab5d36dfd5b3be861f450fc1716c7125f4bb4a
   hotwire-livereload (2.1.1) sha256=0c26a78c4d14f52e5cc52aba46b37d4a5ba12b571ddc5ed8842140aa332d5486
+  httparty (0.24.2) sha256=8fca6a54aa0c4aa4303a0fd33e5e2156175d6a5334f714263b458abd7fda9c38
   i18n (1.14.8) sha256=285778639134865c5e0f6269e0b818256017e8cde89993fdfcbfb64d088824a5
   i18n-tasks (1.1.2) sha256=4dcfba49e52a623f30661cb316cb80d84fbba5cb8c6d88ef5e02545fffa3637a
   i18n_generators (2.2.2) sha256=543d7f7158f68b74f850ab7d5ac48c10113856f5cd1278b176a6c17a8232e2e5
@@ -788,6 +797,7 @@ CHECKSUMS
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   minitest (6.0.1) sha256=7854c74f48e2e975969062833adc4013f249a4b212f5e7b9d5c040bf838d54bb
   msgpack (1.8.0) sha256=e64ce0212000d016809f5048b48eb3a65ffb169db22238fb4b72472fecb2d732
+  multi_xml (0.8.1) sha256=addba0290bac34e9088bfe73dc4878530297a82a7bbd66cb44dcd0a4b86edf5a
   net-imap (0.6.2) sha256=08caacad486853c61676cca0c0c47df93db02abc4a8239a8b67eb0981428acc6
   net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
   net-protocol (0.2.2) sha256=aa73e0cba6a125369de9837b8d8ef82a61849360eba0521900e2c3713aa162a8
