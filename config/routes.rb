@@ -1,6 +1,5 @@
 # SaaS landing page
 Rails.application.routes.draw do
-  mount_avo
   get 'subscriptions/index'
   get 'deadlines/index'
   get 'landing', to: 'home#landing', as: :landing
@@ -43,8 +42,8 @@ Rails.application.routes.draw do
     resource :password_reset, only: %i[new edit create update]
   end
 
-  # Mount Avo admin panel
-  mount Avo::Engine, at: Avo.configuration.root_path
+  # Mount Avo admin panel at /admin
+  mount Avo::Engine, at: '/admin'
   mount SolidErrors::Engine, at: '/solid_errors'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

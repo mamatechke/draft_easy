@@ -13,6 +13,9 @@
             <%= link_to "Cases", cases_path, class: "text-gray-600 hover:text-gray-900 text-sm font-medium" %>
             <%= link_to "Deadlines", deadlines_path, class: "text-gray-600 hover:text-gray-900 text-sm font-medium" %>
             <%= link_to "Add New Case", new_case_path, class: "bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-purple-800 transition" %>
+            <% if Current.user.admin? %>
+              <%= link_to "Admin", "/admin", class: "text-gray-600 hover:text-gray-900 text-sm font-medium" %>
+            <% end %>
             
             <details class="relative" data-controller="dropdown">
               <summary class="cursor-pointer list-none focus:outline-none">
