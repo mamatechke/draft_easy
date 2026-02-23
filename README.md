@@ -2,13 +2,18 @@
 
 ## Getting Started
 
-### Seeded User for Testing
-To test the application with sample data, use the following seeded user account:
+### Seeded Users for Testing
 
+#### Regular User
 - **Email:** lawyer1@drafting.com
-- **Password:** password
+- **Password:** password123
 
 This account comes with 5 pre-loaded sample cases for demonstration purposes.
+
+#### Admin User (for /admin panel)
+- **Email:** admin@draftease.com
+- **Password:** admin123
+- **Access:** Visit `/avo` or `/admin` after signing in
 
 ### Local Development Setup
 1. Clone the repository
